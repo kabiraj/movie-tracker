@@ -1,138 +1,113 @@
 import express from 'express';
+import Movie from '../models/Movie.js';
 
 const router = express.Router();
 
-let moviesId = 1;
-let movies = [
-    { id: moviesId++, title: " Movie A"},
-    { id: moviesId++, title: " Movie B"},
-    { id: moviesId++, title: " Movie C"},
-    { id: moviesId++, title: " Movie D"},
-    { id: moviesId++, title: " Movie E"},
-];
-
-//Helper functions
-
-//function to validate if the request body is present or not
-function validateRequestBody(req, res) {
-    if(!req.body){
-        res.status(400).send("Empty Json body");
-        return false;
-    }else {
-        return true;
+// GET /movies?userId=<user_id>
+// Query parameter: userId (required) - the user ID to fetch movies for
+// Returns: Array of all movie objects for the user
+router.get("/", async (req, res) => {
+    try {
+        const movies = await Movie.find({userId: req.query.userId});
+        res.json(movies);
+        return;
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+        return;
     }
-}
-
-// function to find movies by id
-function findMovieById(id){
-    return movies.find(movie => movie.id === id);
-}
-
-// GET /movies
-// Returns all movies in the in-memory array
-// No parameters required
-// Returns: Array of all movie objects
-router.get("/", (req, res) => {
-    res.json(movies);
-}
-);
-
+});
 
 // GET /movies/search?query=<movie_name>
-// Searches for movies using TMDB API
+// Searches for movies using OMDB API
 // Query parameter: query (required) - the movie name to search for
-// Returns: TMDB API search results (array of movie objects from external API)
-router.get("/search", async (req,res) => {
-    const searchQuery = req.query.query;
-    const TMDB_API_KEY = process.env.TMDB_API_KEY?.trim();
-    const encodedQuery = encodeURIComponent(searchQuery);
-    const tmdb_api_request = `https://api.themoviedb.org/3/search/movie?api_key=${TMDB_API_KEY}&query=${encodedQuery}`;
+// Returns: OMDB API search results (array of movie objects from external API)
+router.get("/search", async (req, res) => {
+    try {
+        const searchQuery = req.query.query;
+        const OMDB_API_KEY = process.env.OMDB_API_KEY;
 
-    const response = await fetch(tmdb_api_request);
-    const data = await response.json();
-    
-    res.json(data);
-});
+        if(!searchQuery){
+            return res.status(400).json({ error: "Search query is required" });
+        }
 
-// GET /movies/:id
-// Returns a single movie by its ID
-// URL parameter: id (required) - the movie ID to fetch
-// Returns: Movie object if found, 404 error if not found
-router.get("/:id", (req,res)=> {
-    const movieId = parseInt(req.params.id);
-    const fetchedMovie = findMovieById(movieId);
-    if(fetchedMovie === undefined){
-        res.status(404).send("Movie not found");
+        const encodedQuery = encodeURIComponent(searchQuery);
+        const omdbUrl = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&s=${encodedQuery}`;
+
+        const response = await fetch(omdbUrl);
+        const data = await response.json();
+
+        // OMDB uses Response: "False" to indicate no results found
+        if(data.Response === "False"){
+            return res.status(404).json({ error: data.Error || "Movie not found in OMDB" });
+        }
+
+        res.json(data);
         return;
-    }else {
-        res.json(fetchedMovie);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
         return;
     }
 });
-
 
 
 
 // POST /movies
-// Creates a new movie and adds it to the in-memory array
-// Request body: { "title": "Movie Title" } (title is required and must be a string)
-// Returns: Updated array of all movies (including the new one)
-// Validation: Checks if body exists and if title is valid string
-router.post("/", (req, res) => {
-    if (!validateRequestBody(req, res)) return;
+// Creates a new movie by fetching from OMDB API and saving to database
+// Request body: { "title": "Movie Title", "userId": "user_id" }
+// Returns: Created movie object with all OMDB data
+router.post("/", async (req, res) => {
+    try {
+        const {imdbId, userId} = req.body;
 
-        const movieTitle = req.body.title;
-
-        if(typeof movieTitle != 'string' || !movieTitle) {
-            res.status(400).send("Invalid movie title");
-            return;
-        } else {
-            const newMovie = { id:moviesId++, title: movieTitle};
-            movies.push(newMovie);
-            res.json(movies);
-            return;
+        if(!imdbId || !userId){
+            return res.status(400).json({ error: "imdbId and userId are required" });
         }
-});
 
-// DELETE /movies
-// Deletes a movie from the in-memory array by ID
-// Request body: { "id": 1 } (id is required)
-// Returns: Updated array of all movies (without the deleted one)
-// Note: This should ideally use DELETE /movies/:id (REST convention) - will fix later
-router.delete("/:id", (req, res) => {
-    const movieToDeleteId = req.params.id;
-    const idToDelete = parseInt(movieToDeleteId);
-        if(!findMovieById(idToDelete)){
-            res.status(404).send("Movie not Found");
-            return;
-        } else {
-            movies = movies.filter(movie => movie.id !== idToDelete);
-            res.json(movies);
-            return;
+        const OMDB_API_KEY = process.env.OMDB_API_KEY;
+        const encodedQuery = encodeURIComponent(imdbId);
+        const omdbUrl = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${encodedQuery}`;
+
+        const response = await fetch(omdbUrl);
+        const data = await response.json();
+
+        // OMDB returns error if movie not found
+        if (data.Response === "False") {
+            return res.status(404).json({ error: data.Error || "Movie not found in OMDB" });
         }
+
+        // Save all movie data from OMDB to database
+        const movie = await Movie.create({
+            title: data.Title,
+            imdbID: data.imdbID,
+            userId: userId,
+            year: data.Year,
+            rated: data.Rated,
+            released: data.Released,
+            runtime: data.Runtime,
+            genre: data.Genre,
+            director: data.Director,
+            writer: data.Writer,
+            actors: data.Actors,
+            plot: data.Plot,
+            language: data.Language,
+            country: data.Country,
+            awards: data.Awards,
+            poster: data.Poster,
+            ratings: data.Ratings,
+            metascore: data.Metascore,
+            imdbRating: data.imdbRating,
+            imdbVotes: data.imdbVotes,
+            type: data.Type,
+            boxOffice: data.BoxOffice,
+            production: data.Production,
+            watchedDate: Date.now()
+        });
+        res.status(201).json(movie);
+        return;
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+        return;
+    }
 });
-
-// PUT /movies/:id
-// Updates an existing movie's title by its ID
-// URL parameter: id (required) - the movie ID to update
-// Request body: { "title": "New Movie Title" } (title is required)
-// Returns: Updated array of all movies, 404 if movie not found, 400 if body invalid
-// Validation: Checks if body exists and if movie exists
-router.put("/:id", (req, res) => {
-        if (!validateRequestBody(req,res)) return;
-        
-        const movieId = parseInt(req.params.id);
-        const movieToUpdate = findMovieById(movieId);
-
-        if(movieToUpdate === undefined){
-            res.status(404).send("Movie not found");
-            return;
-        }else {
-            movieToUpdate.title = req.body.title;
-            res.json(movies);
-            return;
-        }
-});
-
 
 export default router;

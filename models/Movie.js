@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
 
 const movieSchema = new mongoose.Schema({
-    title : {
+    // Basic info
+    title: {
         type: String,
         required: true
     },
-    tmdbId : {
-        type: Number,
+    imdbID: {
+        type: String,
         required: true
     },
     userId: {
@@ -15,9 +16,29 @@ const movieSchema = new mongoose.Schema({
     },
     watchedDate: {
         type: Date,
-        default: Date.now,
-        required: true
-    }
+        default: Date.now
+    },
+    // OMDB movie data
+    year: String,
+    rated: String,
+    released: String,
+    runtime: String,
+    genre: String,
+    director: String,
+    writer: String,
+    actors: String,
+    plot: String,
+    language: String,
+    country: String,
+    awards: String,
+    poster: String,
+    ratings: Array, // Array of rating objects
+    metascore: String,
+    imdbRating: String,
+    imdbVotes: String,
+    type: String,
+    boxOffice: String,
+    production: String
 });
 
 const Movie = mongoose.model('Movie', movieSchema);

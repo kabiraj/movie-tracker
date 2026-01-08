@@ -34,13 +34,12 @@ router.post("/login", async (req, res) => {
         }
 
         const user = await User.findOne({email})
-        console.log(user);
         if(!user){
             return res.status(404).send("User not found");
         }
 
         if( user.password === password){
-            res.status(201).send("Login successful")
+            res.status(200).send("Login successful")
         } else {
             res.status(400).send("login credintials does not match.")
         }
