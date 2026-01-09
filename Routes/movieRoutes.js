@@ -110,4 +110,17 @@ router.post("/", async (req, res) => {
     }
 });
 
+
+router.delete("/:id", async (req, res) => {
+    try {
+        const movieId = req.params.id;
+
+        await Movie.findByIdAndDelete(movieId);
+        res.status(200).json({message: "Movie deleted successfully"});
+        return;
+    } catch (error) {
+        res.status(500).json({error: error.message});
+        return;
+    }
+} );
 export default router;
