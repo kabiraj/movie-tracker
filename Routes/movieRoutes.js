@@ -49,6 +49,32 @@ router.get("/search", async (req, res) => {
     }
 });
 
+// GET /movies/details/:imdbId
+// Fetches details of a movie by imdbId from the OMDB API
+// Request parameter: imdbId (required) - the imdbId of the movie to fetch details for
+// Returns: Entire movie object from OMDB API
+router.get("/details/:imdbId", async (req, res) => {
+    try {
+        const imdbId = req.params.imdbId;
+        const OMDB_API_KEY = process.env.OMDB_API_KEY;
+        const encodedImdbId = encodeURIComponent(imdbId);
+        const omdbUrl = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${encodedImdbId}`;
+
+        const response = await fetch(omdbUrl);
+        const data = await response.json();
+
+        if(data.Response === "False"){
+            res.status(404).json({ error: data.Error });
+            return;
+        } else {
+            res.json(data);
+            return;
+        }
+
+    } catch (error) {
+        res.status(500).json({error: error.message});
+    }
+});
 
 
 // POST /movies
@@ -64,8 +90,8 @@ router.post("/", async (req, res) => {
         }
 
         const OMDB_API_KEY = process.env.OMDB_API_KEY;
-        const encodedQuery = encodeURIComponent(imdbId);
-        const omdbUrl = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${encodedQuery}`;
+        const encodedImdbId = encodeURIComponent(imdbId);
+        const omdbUrl = `http://www.omdbapi.com/?apikey=${OMDB_API_KEY}&i=${encodedImdbId}`;
 
         const response = await fetch(omdbUrl);
         const data = await response.json();
@@ -111,13 +137,22 @@ router.post("/", async (req, res) => {
 });
 
 
+//Delete/movies/:id
+//Deletes a movie by movie id from the database
+//returns a success message if the movie is deleted successfully
+
 router.delete("/:id", async (req, res) => {
     try {
         const movieId = req.params.id;
 
-        await Movie.findByIdAndDelete(movieId);
-        res.status(200).json({message: "Movie deleted successfully"});
-        return;
+        const deletedMovie = await Movie.findByIdAndDelete(movieId);
+        if(!deletedMovie) {
+            return res.status(404).json({ error: "Movie not found"});
+        } else {
+            res.status(200).json({message: "Movie deleted successfully"});
+            return;
+        }
+        
     } catch (error) {
         res.status(500).json({error: error.message});
         return;
