@@ -1,5 +1,7 @@
 import express from 'express';
 import User from '../models/User.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 const router = express.Router();
 
@@ -17,8 +19,11 @@ router.post('/signup', async (req, res) => {
         if(existingUser){
             return res.status(400).send("Email alreayd exist");
         }
+        //const factor to hash the password
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const user = await User.create({username, email, password});
+        const user = await User.create({username, email, password:hashedPassword});
         res.status(201).json({ message: 'User created successfully', user });
     } catch (error) {
         res.status(500).send(error);
@@ -38,11 +43,19 @@ router.post("/login", async (req, res) => {
             return res.status(404).json({error: "User not found"});
         }
 
-        if( user.password === password){
-            res.status(200).json({message: "Login successful"})
+
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if( isPasswordMatch ){
+            const passwordToken = jwt.sign(
+                {userId: user._id},
+                process.env.JWT_SECRET,
+                { expiresIn: "1h"}
+            );
+            res.status(200).json({message: "Login successful", passwordToken})
         } else {
             res.status(401).json({error: "login credintials does not match."})
         }
+
     } catch (error) {
         res.status(500).json({error: error.message});
     }
