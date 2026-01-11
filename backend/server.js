@@ -4,8 +4,10 @@ import movieRoutes from './Routes/movieRoutes.js';
 import connectToDb from './db.js';
 import 'dotenv/config';
 import userRoutes from './Routes/userRoutes.js';
+import cors from 'cors';
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 app.use('/movies', movieRoutes);
 app.use('/users', userRoutes);

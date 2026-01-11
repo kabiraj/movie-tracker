@@ -22,7 +22,7 @@ router.get("/", authenticateToken, async (req, res) => {
 // Searches for movies using OMDB API
 // Query parameter: query (required) - the movie name to search for
 // Returns: OMDB API search results (array of movie objects from external API)
-router.get("/search", async (req, res) => {
+router.get("/search", authenticateToken,async (req, res) => {
     try {
         const searchQuery = req.query.query;
         const OMDB_API_KEY = process.env.OMDB_API_KEY;
@@ -55,7 +55,7 @@ router.get("/search", async (req, res) => {
 //userId is passed in the request header as a bearer token
 // Request parameter: imdbId (required) - the imdbId of the movie to fetch details for
 // Returns: Entire movie object from OMDB API
-router.get("/details/:imdbId", async (req, res) => {
+router.get("/details/:imdbId",authenticateToken, async (req, res) => {
     try {
         const imdbId = req.params.imdbId;
         const OMDB_API_KEY = process.env.OMDB_API_KEY;
@@ -132,9 +132,12 @@ router.post("/", authenticateToken, async (req, res) => {
             production: data.Production,
             watchedDate: Date.now()
         });
-        res.status(201).json(movie);
-        return;
+        return res.status(201).json(movie);
     } catch (error) {
+        // Mongo duplicate key error (triggered by unique index, e.g. userId+imdbID)
+        if (error?.code === 11000) {
+            return res.status(409).json({ error: "Movie already saved" });
+        }
         res.status(500).json({ error: error.message });
         return;
     }
@@ -142,18 +145,18 @@ router.post("/", authenticateToken, async (req, res) => {
 
 
 //Delete/movies/:id
-//Deletes a movie by movie id from the database
+// Deletes a movie by movie id from the database if the movie belongs to the user
+//userId is passed in the request header as a bearer token
 //returns a success message if the movie is deleted successfully
 
 router.delete("/:id", authenticateToken, async (req, res) => {
     try {
         const movieId = req.params.id;
 
-        const deletedMovie = await Movie.findByIdAndDelete(
+        const deletedMovie = await Movie.findOneAndDelete(
             { 
                 _id: movieId,
                 userId: req.userId
-                
             }
         );
         if(!deletedMovie) {

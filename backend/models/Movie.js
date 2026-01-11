@@ -32,7 +32,7 @@ const movieSchema = new mongoose.Schema({
     country: String,
     awards: String,
     poster: String,
-    ratings: Array, // Array of rating objects
+    ratings: Array,
     metascore: String,
     imdbRating: String,
     imdbVotes: String,
@@ -40,6 +40,7 @@ const movieSchema = new mongoose.Schema({
     boxOffice: String,
     production: String
 });
+
 
 const Movie = mongoose.model('Movie', movieSchema);
 
