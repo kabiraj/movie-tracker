@@ -1,14 +1,15 @@
 import express from 'express';
 import Movie from '../models/Movie.js';
+import authenticateToken from '../middleware/auth.js';
 
 const router = express.Router();
 
 // GET /movies?userId=<user_id>
 // Query parameter: userId (required) - the user ID to fetch movies for
 // Returns: Array of all movie objects for the user
-router.get("/", async (req, res) => {
+router.get("/", authenticateToken, async (req, res) => {
     try {
-        const movies = await Movie.find({userId: req.query.userId});
+        const movies = await Movie.find({userId: req.userId});
         res.json(movies);
         return;
     } catch (error) {
@@ -51,6 +52,7 @@ router.get("/search", async (req, res) => {
 
 // GET /movies/details/:imdbId
 // Fetches details of a movie by imdbId from the OMDB API
+//userId is passed in the request header as a bearer token
 // Request parameter: imdbId (required) - the imdbId of the movie to fetch details for
 // Returns: Entire movie object from OMDB API
 router.get("/details/:imdbId", async (req, res) => {
@@ -79,14 +81,16 @@ router.get("/details/:imdbId", async (req, res) => {
 
 // POST /movies
 // Creates a new movie by fetching from OMDB API and saving to database
-// Request body: { "title": "Movie Title", "userId": "user_id" }
+// Request body: { "title": "Movie Title"}
+//userId is passed in the request header as a bearer token
 // Returns: Created movie object with all OMDB data
-router.post("/", async (req, res) => {
+router.post("/", authenticateToken, async (req, res) => {
     try {
-        const {imdbId, userId} = req.body;
+        const {imdbId} = req.body;
+        const userId = req.userId;
 
-        if(!imdbId || !userId){
-            return res.status(400).json({ error: "imdbId and userId are required" });
+        if(!imdbId){
+            return res.status(400).json({ error: "imdbId is required" });
         }
 
         const OMDB_API_KEY = process.env.OMDB_API_KEY;
@@ -141,11 +145,17 @@ router.post("/", async (req, res) => {
 //Deletes a movie by movie id from the database
 //returns a success message if the movie is deleted successfully
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticateToken, async (req, res) => {
     try {
         const movieId = req.params.id;
 
-        const deletedMovie = await Movie.findByIdAndDelete(movieId);
+        const deletedMovie = await Movie.findByIdAndDelete(
+            { 
+                _id: movieId,
+                userId: req.userId
+                
+            }
+        );
         if(!deletedMovie) {
             return res.status(404).json({ error: "Movie not found"});
         } else {
