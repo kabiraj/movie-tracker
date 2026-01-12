@@ -1,12 +1,17 @@
 import './App.css'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
+import MoviesListPage from './pages/MoviesListPage'
 
 function App() {
 
   return (
-    <div>
-      <LoginPage />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/login' element={<LoginPage />} />
+        <Route path='/movies' element={<MoviesListPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 

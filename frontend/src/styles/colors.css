@@ -1,0 +1,20 @@
+:root {
+  /* Background colors */
+  --bg-dark: #1a0f2e;           /* Deep purple background */
+  --bg-card: #2d1b4e;           /* Card/container background */
+  
+  /* Accent colors (romantic theme) */
+  --accent-pink: #ff69b4;       /* Soft pink */
+  --accent-rose: #e8b4b8;       /* Rose gold */
+  --accent-purple: #9d4edd;     /* Deep purple */
+  --accent-purple-dark: #7b2cbf; /* Darker purple */
+  
+  /* Text colors */
+  --text-primary: #f8f9fa;      /* Soft white */
+  --text-secondary: #fdf4f5;    /* Cream/off-white */
+  
+  /* Highlight/special */
+  --highlight-gold: #d4af37;    /* Gold */
+  --highlight-champagne: #f4e4c1; /* Champagne */
+}
+
