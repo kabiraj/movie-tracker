@@ -40,7 +40,7 @@ router.post("/login", async (req, res) => {
 
         const user = await User.findOne({email})
         if(!user){
-            return res.status(404).json({error: "User not found"});
+            return res.status(404).json({error: "Incorrect username or password"});
         }
 
 
@@ -53,7 +53,7 @@ router.post("/login", async (req, res) => {
             );
             res.status(200).json({message: "Login successful", passwordToken})
         } else {
-            res.status(401).json({error: "login credintials does not match."})
+            res.status(401).json({error: "Incorrect username or password"})
         }
 
     } catch (error) {
