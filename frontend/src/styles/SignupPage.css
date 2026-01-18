@@ -141,6 +141,15 @@
     color: #ff4444;
 }
 
+.error-message-server{
+    border: 1px solid rgba(255, 68, 68, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 68, 68, 0.1);
+    color: var(--accent-main);
+    font-size: 12px;
+    padding: 0.75rem;
+    text-align: center;
+}
 
 .signup-photo-section {
     padding: 1rem;

@@ -11,13 +11,13 @@ router.post('/signup', async (req, res) => {
         const {fullName, email, password} = req.body;
 
         if(!fullName || !email || !password) {
-            return res.status(400).send("All fields are required");
+            return res.status(400).json({error: "All fields are required"});
         }
 
         const existingUser = await User.findOne({email});
 
         if(existingUser){
-            return res.status(400).send("Email alreayd exist");
+            return res.status(400).json({error:("Email alreayd exist")});
         }
         //const factor to hash the password
         const saltRounds = 10;
@@ -26,7 +26,7 @@ router.post('/signup', async (req, res) => {
         const user = await User.create({fullName, email, password:hashedPassword});
         res.status(201).json({ message: 'User created successfully', user });
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).json({error});
     }
 });
 

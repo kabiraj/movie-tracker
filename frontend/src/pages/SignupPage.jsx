@@ -8,7 +8,8 @@ function SignUpPage() {
     const [errors, setErrors] = useState({
         fullName: '',
         email: '',
-        password: ''
+        password: '',
+        general: ''
     })
 
     function validateForm() {
@@ -22,6 +23,42 @@ function SignUpPage() {
         if(!fullName.trim()){
             newErrors.fullName = 'Full name is required'
             isValid = false;
+        }
+
+        // Email validation
+        if (!email.trim()) {
+            newErrors.email = 'Email is required'
+            isValid = false
+        } else if (!email.includes('@')) {
+            newErrors.email = 'Email must contain @'
+            isValid = false
+        } else {
+            const domain = email.split('@')[1]
+            if (!domain || !domain.includes('.') || domain.startsWith('.') || domain.endsWith('.')) {
+                newErrors.email = 'Email must have a valid domain'
+                isValid = false
+            }
+        }
+
+        // Password validation
+        if (!password.trim()) {
+            newErrors.password = 'Password is required'
+            isValid = false
+        } else if (password.length < 8) {
+            newErrors.password = 'Password must be at least 8 characters'
+            isValid = false
+        } else if (!/[A-Z]/.test(password)) {
+            newErrors.password = 'Password must include an uppercase letter'
+            isValid = false
+        } else if (!/[a-z]/.test(password)) {
+            newErrors.password = 'Password must include a lowercase letter'
+            isValid = false
+        } else if (!/\d/.test(password)) {
+            newErrors.password = 'Password must include a number'
+            isValid = false
+        } else if (!/[^A-Za-z0-9]/.test(password)) {
+            newErrors.password = 'Password must include a special character'
+            isValid = false
         }
 
         setErrors(newErrors)
@@ -38,6 +75,22 @@ function SignUpPage() {
             return;
         }
 
+        try {
+            const response = await fetch('http://localhost:3000/users/signup', {
+                method: 'POST',
+                headers: {'Content-type' : 'application/json'},
+                body: JSON.stringify({fullName, email, password})
+            })
+
+            const data = await response.json();
+
+            if(!response.ok) {
+                setErrors({...errors, general:  data.error || data.message || ' Server error'})
+                return
+            }
+        } catch {
+            setErrors({...errors, general: 'Network error. Try again.'})
+        }
     }
 
     return (
@@ -51,12 +104,20 @@ function SignUpPage() {
                                 Track favorites, build watchlists, and enjoy
                             </p>
                         </div>
+                        {errors.general && (
+                            <span className='error-message-server'>! {errors.general}</span>
+                        )}
                         <div className="form-field">
                             <label htmlFor="fullName">Full Name</label>
                             <input
                                 id="fullName"
                                 value={fullName}
-                                onChange={(e) => setFullName(e.target.value)}
+                                onChange={(e) => {
+                                    setFullName(e.target.value)
+                                        setFullName(e.target.value)
+                                        setErrors((prevError) => ({...prevError, fullName: ''}))
+                                    }
+                                }
                             />
                             {errors.fullName && (
                                 <span className='error-message'>{errors.fullName}</span>
@@ -68,8 +129,14 @@ function SignUpPage() {
                                 id="email"
                                 type="email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => {
+                                    setEmail(e.target.value)
+                                    setErrors((prevErrors) => ({...prevErrors, email:'', general:''}))
+                                }}
                             />
+                            {errors.email && (
+                                <span className='error-message'>{errors.email}</span>
+                            )}
                         </div>
                         <div className="form-field">
                             <label htmlFor="password">Password</label>
@@ -77,9 +144,15 @@ function SignUpPage() {
                                 id="password"
                                 type="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => {
+                                    setPassword(e.target.value)
+                                    setErrors((prevErrors) => ({...prevErrors, password:''}))
+                                }}
                             />
-                            <span className="field-hint">Use at least 8 characters.</span>
+                            {errors.password && (
+                                <span className='error-message'>{errors.password}</span>
+                            )}
+        
                         </div>
                         <div className="form-actions">
                             <button type="submit">Sign up</button>
