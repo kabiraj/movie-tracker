@@ -107,7 +107,7 @@ function SignUpPage() {
                         {errors.general && (
                             <span className='error-message-server'>! {errors.general}</span>
                         )}
-                        <div className="form-field">
+                        <div className="form-field-signup">
                             <label htmlFor="fullName">Full Name</label>
                             <input
                                 id="fullName"
@@ -123,7 +123,7 @@ function SignUpPage() {
                                 <span className='error-message'>{errors.fullName}</span>
                             )}
                         </div>
-                        <div className="form-field">
+                        <div className="form-field-signup">
                             <label htmlFor="email">Email Address</label>
                             <input
                                 id="email"
@@ -138,7 +138,7 @@ function SignUpPage() {
                                 <span className='error-message'>{errors.email}</span>
                             )}
                         </div>
-                        <div className="form-field">
+                        <div className="form-field-signup">
                             <label htmlFor="password">Password</label>
                             <input
                                 id="password"
@@ -154,14 +154,14 @@ function SignUpPage() {
                             )}
         
                         </div>
-                        <div className="form-actions">
+                        <div className="form-field-signup">
                             <button type="submit">Sign up</button>
                         </div>
                     </form>
                 </div>
 
                 <div className="signup-photo-section">
-                    
+
                 </div>
             </div>
         </div>

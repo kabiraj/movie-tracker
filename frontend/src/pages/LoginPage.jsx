@@ -100,34 +100,41 @@ function LoginPage(){
                     {errors.general && (
                         <div className="error-message general">{errors.general}</div>
                     )}
+                    <div className="form-field-login">
+                        <label htmlFor="email-input">Email</label>
+                        <input 
+                            id="email-input"
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            className={errors.email ? 'error' : ''}
+                        />
+                        {errors.email && (
+                            <span className="error-message">{errors.email}</span>
+                        )}
+                    </div>
                     
-                    <label htmlFor="email-input">Email</label>
-                    <input 
-                        id="email-input"
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className={errors.email ? 'error' : ''}
-                    />
-                    {errors.email && (
-                        <span className="error-message">{errors.email}</span>
-                    )}
+                    <div className="form-field-login">
+                        <label htmlFor="password-input">Password</label>
+                        <input 
+                            id="password-input"
+                            type="password"
+                            value={password}
+                            onChange={(e) => {
+                                setPassword(e.target.value)
+                                setErrors((prevErrors) => ({...prevErrors, password: ''}))
+                            }}
+                            className={errors.password ? 'error' : ''}
+                        />
+                        {errors.password && (
+                            <span className="error-message">{errors.password}</span>
+                        )}
+                    </div>
+                    <div className="form-field-login"> 
+                        <button type="submit">Login</button>
+                    </div>
+
                     
-                    <label htmlFor="password-input">Password</label>
-                    <input 
-                        id="password-input"
-                        type="password"
-                        placeholder="Password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className={errors.password ? 'error' : ''}
-                    />
-                    {errors.password && (
-                        <span className="error-message">{errors.password}</span>
-                    )}
-                    
-                    <button type="submit">Login</button>
                 </form>
             </div>
         </div>

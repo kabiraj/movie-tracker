@@ -41,6 +41,9 @@
 
  /* Form */
 
+ .form-field-login {
+    margin: 0.5rem;
+ }
 .login-container form {
     display: flex;
     flex-direction: column;
@@ -52,15 +55,11 @@
     font-weight: 500;
     letter-spacing: 0.2px;
     color: var(--text-secondary);
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
 }
 
 .login-container input {
     width: 100%;
     height: 56px;
-    padding: 0 1rem;
-    margin-bottom: 0.5rem;
     border: 1px solid rgba(15, 23, 42, 0.12);
     border-radius: 8px;
     background: var(--bg-light);
@@ -76,41 +75,35 @@
     background: var(--bg-card);
 }
 
-.login-container input::placeholder {
-    color: var(--text-secondary);
-}
 
 .login-container button {
+    border: 1px solid red;
+    border-radius: 10px;
+    background-color: var(--accent-main);
+    color: var(--bg-card);
+    font-size: var(--font-subheading);
+    font-weight: var(--weight-subheading);
+    letter-spacing: var(--letter-spacing-subheading);
+    line-height: var(--lineheight-subheading);
+    margin-top: 1rem;
+    outline: none;
     width: 100%;
     height: 56px;
-    padding: 0;
-    margin-top: 2.5rem;
-    border: 1px solid rgba(0, 113, 227, 0.2);
-    border-radius: 10px;
-    background: var(--accent-blue);
-    color: var(--bg-card);
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 0.7px;
-    cursor: pointer;
-    transition: all 0.2s ease;
 }
 
 .login-container button:hover {
-    background: var(--accent-blue-dark);
-    border-color: rgba(0, 113, 227, 0.35);
+    border-color: rgb(229, 9, 20, 0.5);
+    background: var(--accent-secondary);
+    transform: translateY(-1px);;
 }
 
 .login-container button:active {
-    background: var(--accent-blue-dark);
+    border-color: rgb(178, 7, 16, 0.5);
+    background: var(--accent-main);
+    transform: translateY(1px);
 }
 
 /* Error States */
-
-.login-container input.error {
-    border-color: #ff4444;
-    background: rgba(255, 68, 68, 0.1);
-}
 
 .login-container .error-message {
     display: block;
