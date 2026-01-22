@@ -12,6 +12,7 @@ function SignUpPage() {
         general: ''
     })
 
+    // Validates inputs before submitting to the API
     function validateForm() {
         const newErrors = {
             fullName: '',
@@ -66,10 +67,11 @@ function SignUpPage() {
 
     }
 
+    // Submits form data to the backend and handles errors
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        setErrors({fullName: '',email:'', password: '' })
+        setErrors({ fullName: '', email: '', password: '', general: '' })
 
         if(!validateForm()) {
             return;
@@ -97,13 +99,19 @@ function SignUpPage() {
         <div className="signup-page">
             <div className="signup-wrapper">
                 <div className="signup-container">
-                    <form onSubmit ={handleSubmit} noValidate>
+                    <form onSubmit={handleSubmit} noValidate>
                         <div className="signup-header">
+                            <img
+                                className="signup-logo"
+                                src="/logo/logo.png"
+                                alt="Movie Tracker logo"
+                            />
                             <h1 className="signup-title">Create your account</h1>
                             <p className="signup-subtitle">
                                 Track favorites, build watchlists, and enjoy
                             </p>
                         </div>
+                        {/* Server-side error (e.g., email already exists) */}
                         {errors.general && (
                             <span className='error-message-server'>! {errors.general}</span>
                         )}
@@ -114,10 +122,8 @@ function SignUpPage() {
                                 value={fullName}
                                 onChange={(e) => {
                                     setFullName(e.target.value)
-                                        setFullName(e.target.value)
-                                        setErrors((prevError) => ({...prevError, fullName: ''}))
-                                    }
-                                }
+                                    setErrors((prevError) => ({ ...prevError, fullName: '' }))
+                                }}
                             />
                             {errors.fullName && (
                                 <span className='error-message'>{errors.fullName}</span>
@@ -131,7 +137,7 @@ function SignUpPage() {
                                 value={email}
                                 onChange={(e) => {
                                     setEmail(e.target.value)
-                                    setErrors((prevErrors) => ({...prevErrors, email:'', general:''}))
+                                    setErrors((prevErrors) => ({ ...prevErrors, email: '', general: '' }))
                                 }}
                             />
                             {errors.email && (
@@ -146,7 +152,7 @@ function SignUpPage() {
                                 value={password}
                                 onChange={(e) => {
                                     setPassword(e.target.value)
-                                    setErrors((prevErrors) => ({...prevErrors, password:''}))
+                                    setErrors((prevErrors) => ({ ...prevErrors, password: '' }))
                                 }}
                             />
                             {errors.password && (
@@ -161,7 +167,15 @@ function SignUpPage() {
                 </div>
 
                 <div className="signup-photo-section">
-
+                        <div className="poster-grid">
+                            <img src="/movieposter/1.jpg" alt="Movie poster 1" />
+                            <img src="/movieposter/2.jpg" alt="Movie poster 2" />
+                            <img src="/movieposter/3.jpg" alt="Movie poster 3" />
+                            <img src="/movieposter/4.jpg" alt="Movie poster 4" />
+                            <img src="/movieposter/5.jpg" alt="Movie poster 5" />
+                            <img src="/movieposter/6.jpg" alt="Movie poster 6" />
+                            <img src="/movieposter/7.jpg" alt="Movie poster 7" />
+                        </div>
                 </div>
             </div>
         </div>

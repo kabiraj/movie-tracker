@@ -93,6 +93,13 @@ function LoginPage(){
         <div className='login-page'>
             <div className='login-container'>
                 <header className="login-header">
+                <div className='logo-container'>
+                    <img
+                        className="login-logo"
+                        src="/logo/logo.png"
+                        alt="Movie Tracker logo"
+                        />
+                </div>
                     <h1>Welcome back</h1>
                     <p>Sign in to your account</p>
                 </header>
@@ -106,7 +113,10 @@ function LoginPage(){
                             id="email-input"
                             type="email"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(e) => {
+                                setEmail(e.target.value)
+                                setErrors((prevErrors) => ({...prevErrors, email:""}))
+                            }}
                             className={errors.email ? 'error' : ''}
                         />
                         {errors.email && (
