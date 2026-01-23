@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar'
 
 function MoviesListPage() {
     const [movies, setMovies] = useState([])
+    const navigate = useNavigate()
 
-    useEffect (() => {
         const fetchedMovies = async () => {
             const token = localStorage.getItem('token')
 
@@ -14,14 +16,21 @@ function MoviesListPage() {
                 
             })
 
+            if (!response.ok) {
+                if (response.status === 401) {
+                    navigate('/login')
+                    return
+                }
+            }
+
             const data = await response.json()
             setMovies(data)
         }
         fetchedMovies()
-    }, [])
 
     return (
         <div>
+            <Navbar />
             <h1>Movies List</h1>
             {
                 movies.map((movie) => (

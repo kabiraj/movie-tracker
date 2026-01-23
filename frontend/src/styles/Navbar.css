@@ -1,0 +1,31 @@
+.nav-container {
+    align-items: center;
+    background: black;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0.5rem;
+    padding: 1.2rem;
+    max-width: 100%;
+
+}
+
+.nav-logo img {
+    display: flex;
+    align-items: center;
+    width: 100px;
+}
+
+.nav-bar ul {
+    align-items: center;
+    color: white;
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-bar li {
+    color: white;
+    cursor: pointer;
+}
