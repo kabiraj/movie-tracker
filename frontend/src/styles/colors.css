@@ -1,14 +1,15 @@
 :root {
   /* Background colors */
-  --bg-light: #f8f7f3;
+  --bg-dark: linear-gradient(135deg, #000000 0%, #2c1c1e 100%);;
   --bg-card: #ffffff;
 
   --accent-main: #e50914;
   --accent-secondary: #b20710;
 
   /* Text colors */
-  --text-primary: #1c1c1e;
-  --text-secondary: #6b7280;
+  --text-primary: #ffffff;
+  --text-secondary: rgb(247, 241, 241, 0.5);
+  --text-dark: rgb(0, 0, 0, 0.6);
 
   /* Text styles */
   --font-heading: 32px;

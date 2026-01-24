@@ -1,14 +1,17 @@
 .nav-container {
     align-items: center;
-    background: black;
+    background: rgba(255, 255, 255, 0.09);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin: 0.5rem;
     padding: 1.2rem;
     max-width: 100%;
-
 }
 
 .nav-logo {
@@ -23,13 +26,13 @@
 
 ul {
     align-items: center;
-    color: white;
+    color: var(--text-primary);
     list-style: none;
     display: flex;
     gap: 2rem;
 }
 
 li {
-    color: white;
+    color: var(--text-primary);
     cursor: pointer;
 }

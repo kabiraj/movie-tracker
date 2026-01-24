@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import '../styles/MoviesList.css'
+import Footer from '../components/Footer'
 
 function MoviesListPage() {
     const [movies, setMovies] = useState([])
@@ -44,6 +45,7 @@ function MoviesListPage() {
                     }
                 </div>
             </div>
+            < Footer/>
         </div>
     )
 }
