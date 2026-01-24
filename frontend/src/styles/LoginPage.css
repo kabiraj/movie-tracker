@@ -118,9 +118,6 @@
 .login-container .error-message.general {
     text-align: center;
     padding: 0.75rem;
-    border: 1px solid rgba(229, 9, 20, 0.3);
-    border-radius: 8px;
-    background: rgba(229, 9, 20, 0.1);
 }
 
 .login-logo {

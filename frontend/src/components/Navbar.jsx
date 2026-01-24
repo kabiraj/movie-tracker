@@ -5,11 +5,13 @@ export default function Navbar() {
         <nav>
             <div className='nav-container'>
                 <div className='nav-logo'>
-                    <img src='/logo/logo_navbar.png' />
+                    <ul>
+                        <li><img src='/logo/logo_navbar.png' /></li>
+                    </ul>
+                    
                 </div>
                 <div className='nav-bar'>
                     <ul>
-                        <li>Home</li>
                         <li>Profile</li>
                         <li>Search</li>
                         <li>Logout</li>

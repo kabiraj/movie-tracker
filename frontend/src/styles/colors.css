@@ -3,7 +3,6 @@
   --bg-light: #f8f7f3;
   --bg-card: #ffffff;
 
-  /* Accent colors (Netflix red) */
   --accent-main: #e50914;
   --accent-secondary: #b20710;
 
@@ -27,6 +26,7 @@
   --weight-semibold: 600;
   --weight-regular: 400;
 
+  --footer-bg: #fbfbfb;
 
 }
 

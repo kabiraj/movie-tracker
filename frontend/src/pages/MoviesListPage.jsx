@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
+import '../styles/MoviesList.css'
 
 function MoviesListPage() {
     const [movies, setMovies] = useState([])
@@ -29,17 +30,20 @@ function MoviesListPage() {
         fetchedMovies()
 
     return (
-        <div>
+        <div className="movies-page">
             <Navbar />
-            <h1>Movies List</h1>
-            {
-                movies.map((movie) => (
-                    <div key={movie._id}>
-                        <h3>{movie.title}</h3>
-                        <p>{movie.year}</p>
-                    </div>
-                ))
-            }
+            <div className='movie-container'>
+                <h1>Movies List</h1>
+                <div className='movie-grid'>
+                    {
+                        movies.map((movie) => (
+                            <div key={movie._id}>
+                                <img src={movie.poster}/>
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
         </div>
     )
 }

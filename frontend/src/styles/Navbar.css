@@ -11,13 +11,17 @@
 
 }
 
+.nav-logo {
+    display: flex;
+    flex-direction: row;
+}
 .nav-logo img {
     display: flex;
     align-items: center;
     width: 100px;
 }
 
-.nav-bar ul {
+ul {
     align-items: center;
     color: white;
     list-style: none;
@@ -25,7 +29,7 @@
     gap: 2rem;
 }
 
-.nav-bar li {
+li {
     color: white;
     cursor: pointer;
 }

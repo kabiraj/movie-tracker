@@ -1,0 +1,34 @@
+.movie-container {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+    padding: 1rem;
+    margin: 1rem;
+}
+.movie-container h1 {
+    font-size: var(--font-heading);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--letter-spacing-heading);
+    line-height: var(--lineheight-heading);
+}
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.movie-grid > div {
+    width: 100%;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.movie-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}

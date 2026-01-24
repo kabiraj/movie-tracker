@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/SignupPage.css'
 
 function SignUpPage() {
@@ -11,6 +12,8 @@ function SignUpPage() {
         password: '',
         general: ''
     })
+
+    const navigate = useNavigate()
 
     // Validates inputs before submitting to the API
     function validateForm() {
@@ -90,6 +93,7 @@ function SignUpPage() {
                 setErrors({...errors, general:  data.error || data.message || ' Server error'})
                 return
             }
+            navigate('/login')
         } catch {
             setErrors({...errors, general: 'Network error. Try again.'})
         }
