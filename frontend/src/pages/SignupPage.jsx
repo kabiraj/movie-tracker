@@ -101,15 +101,17 @@ function SignUpPage() {
 
     return (
         <div className="signup-page">
+            <div className='logo-container'>
+                    <img
+                        className="signup-logo"
+                        src="/logo/logo.png"
+                        alt="Movie Tracker logo"
+                    />
+                </div>
             <div className="signup-wrapper">
                 <div className="signup-container">
                     <form onSubmit={handleSubmit} noValidate>
                         <div className="signup-header">
-                            <img
-                                className="signup-logo"
-                                src="/logo/logo.png"
-                                alt="Movie Tracker logo"
-                            />
                             <h1 className="signup-title">Create your account</h1>
                             <p className="signup-subtitle">
                                 Track favorites, build watchlists, and enjoy

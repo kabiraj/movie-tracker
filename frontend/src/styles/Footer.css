@@ -1,10 +1,11 @@
+
 footer {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(44, 28, 30, 0.205);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: var(--text-secondary);
-    padding: 2rem;
     margin-top: auto;
+    padding: 1rem;
     width: 100%;
 }
 

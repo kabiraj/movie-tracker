@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/LoginPage.css'
+import Footer from '../components/Footer'
 
 function LoginPage(){
     const [email, setEmail] = useState('')
@@ -91,15 +92,15 @@ function LoginPage(){
 
     return (
         <div className='login-page'>
-            <div className='login-container'>
-                <header className="login-header">
-                <div className='logo-container'>
+            <div className='logo-container'>
                     <img
                         className="login-logo"
                         src="/logo/logo.png"
                         alt="Movie Tracker logo"
                         />
                 </div>
+            <div className='login-container'>
+                <header className="login-header">
                     <h1>Welcome back</h1>
                     <p>Sign in to your account</p>
                 </header>
@@ -147,6 +148,7 @@ function LoginPage(){
                     
                 </form>
             </div>
+            <Footer />
         </div>
     )
 }
