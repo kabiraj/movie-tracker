@@ -1,9 +1,24 @@
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 1000;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+}
+
+nav.scrolled {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+}
+
 .nav-container {
     align-items: center;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 1.2rem;
+    padding: 1rem;
 }
 
 .nav-logo {
@@ -16,15 +31,32 @@
     width: 100px;
 }
 
-ul {
+.nav-bar {
+    margin: 0 3rem;
+}
+.nav-bar ul {
     align-items: center;
     color: var(--text-primary);
     list-style: none;
     display: flex;
-    gap: 2rem;
+    gap: 1rem;
 }
 
-li {
+.nav-bar li {
     color: var(--text-primary);
     cursor: pointer;
+}
+
+.nav-bar a {
+    color: var(--text-primary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.nav-bar a:hover {
+    background: rgba(229, 9, 20, 0.2);
+    color: var(--accent-main);
 }

@@ -79,7 +79,7 @@ function LoginPage(){
 
             // Save token and redirect on successful login
             localStorage.setItem('token', data.passwordToken)
-            navigate('/movies')
+            navigate('/search')
         } catch {
             // Handle network errors
             setErrors({

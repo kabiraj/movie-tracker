@@ -4,6 +4,7 @@
     flex-direction: column;
     min-height: 100vh;
     max-width: 100%;
+    padding-top: 5rem;
 }
 
 .search-container-wrapper {
@@ -82,3 +83,41 @@
     background: var(--accent-main);
     transform: translateY(1px);
 }
+
+.movie-grid-search {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    width: 100%;
+}
+
+.movie-grid-search > div {
+    width: 100%;
+    aspect-ratio: 2/3;
+    overflow: hidden;
+    border-radius: 12px;
+    
+}
+
+.movie-grid-search img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.movies-container-search {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem 6rem;
+
+}
+
+.movies-container-search  h1 {
+    color: var(--text-primary);
+    opacity: 0.7;
+}
+
+

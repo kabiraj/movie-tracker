@@ -1,19 +1,30 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import '../styles/SearchPage.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom'
 
 
 function SearchPage() {
     const [keyword, setKeyword] = useState('')
     const [searchResults, setSearchResults] = useState([])
+    const navigate = useNavigate()
+    const token = localStorage.getItem('token')
+
+    useEffect(() => {
+        if(!token) {
+            navigate('/login')
+        }
+    }, [token, navigate])
+    
+    // if (!token) {
+    //     return null
+    // }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
-        const token = localStorage.getItem('token')
         setSearchResults([])
-        
+
         if(!keyword.trim()){
             return
         }
@@ -60,27 +71,26 @@ function SearchPage() {
                 </div>
             </div>
 
-            <div className='movies-container'>
-                <ul>
-                    {
-                        searchResults.map((searchResult, index) => (
-
-                            <li 
-                                key={`${searchResult.imdbID}- ${index}`}
-                                className='movie-item'
-                            >
-                                    <img    
-                                        src ={searchResult.Poster}
-                                        onError = {(e) => {
-                                            e.target.parentElement.style.display = 'none'
-                                        }}
-                                    />
-                                    <button className='add-to-watch-list'>Add to watchlist</button>
-                            </li>
-                        ))
-                    }
-                </ul>
-            </div>
+            
+                {searchResults.length > 0 && (
+                    <div className='movies-container-search'>
+                        <h1>Search results</h1>
+                        <div className='movie-grid-search'>
+                            {
+                                searchResults.map((movie) => (
+                                    <div key={movie._id}>
+                                        <img 
+                                            src={movie.Poster}
+                                                onError={(e) => {
+                                                e.target.parentElement.style.display='none'
+                                            }}
+                                        />
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+                )}
             <Footer />
         </div>
     )

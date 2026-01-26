@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import '../styles/MoviesList.css'
@@ -7,9 +7,14 @@ import Footer from '../components/Footer'
 function MoviesListPage() {
     const [movies, setMovies] = useState([])
     const navigate = useNavigate()
+    const token = localStorage.getItem('token')
 
+    useEffect(() => {
+        
+        if(!token) {
+            navigate('/login')
+        }
         const fetchedMovies = async () => {
-            const token = localStorage.getItem('token')
 
             const response = await fetch('http://localhost:3000/movies', {
                 headers: {
@@ -29,6 +34,8 @@ function MoviesListPage() {
             setMovies(data)
         }
         fetchedMovies()
+
+    }, [navigate, token])
 
     return (
         <div className="movies-page">

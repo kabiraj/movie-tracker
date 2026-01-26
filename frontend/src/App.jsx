@@ -4,7 +4,6 @@ import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import MoviesListPage from './pages/MoviesListPage'
 import SearchPage from './pages/SearchPage'
-import Footer from './components/Footer'
 
 function App() {
 
