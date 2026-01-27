@@ -1,16 +1,102 @@
-# React + Vite
+# Movie Tracker Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React frontend for the Movie Tracker app. Built with Vite for fast development and hot module replacement.
 
-Currently, two official plugins are available:
+## What's Here
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This is the frontend part of the movie tracker app. It's a React app that lets users:
+- Sign up and log in
+- Search for movies
+- Add movies to their watchlist
+- View and delete movies from their watchlist
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** - UI framework
+- **Vite** - Build tool (way faster than Create React App)
+- **React Router** - For navigation between pages
+- **React Icons** - For icons (heart, trash, etc.)
+- **CSS** - Custom styling with glassmorphism effects
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Install Dependencies
+
+```bash
+npm install
+```
+
+### Run Development Server
+
+```bash
+npm run dev
+```
+
+Opens on `http://localhost:5173` (or whatever port Vite picks).
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+Output goes to `dist/` folder.
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+## Project Structure
+
+```
+src/
+├── components/        # Reusable components
+│   ├── Navbar.jsx    # Navigation bar with scroll effects
+│   └── Footer.jsx    # Footer component
+├── pages/            # Page components
+│   ├── LoginPage.jsx      # Login form
+│   ├── SignupPage.jsx     # Signup form
+│   ├── SearchPage.jsx     # Movie search page
+│   └── MoviesListPage.jsx # User's watchlist
+├── styles/           # CSS files
+│   ├── colors.css    # CSS variables for colors
+│   ├── Navbar.css
+│   ├── SearchPage.css
+│   └── MoviesList.css
+└── App.jsx           # Main app with routes
+```
+
+## Features
+
+- **Protected Routes** - Pages check for JWT token, redirect to login if missing
+- **Responsive Design** - Works on mobile and desktop
+- **Glassmorphism UI** - Modern frosted glass effects
+- **Smooth Animations** - Hover effects, transitions, scroll-triggered navbar
+- **State Management** - React hooks for managing data
+
+## API Integration
+
+The frontend talks to the backend at `http://localhost:3000`. Make sure the backend is running!
+
+All authenticated requests need a JWT token in the Authorization header:
+```
+Authorization: Bearer <token>
+```
+
+Tokens are stored in `localStorage` after login.
+
+## Development Tips
+
+- Hot reload is enabled - changes show up instantly
+- Check browser console for errors
+- Network tab shows API requests/responses
+- React DevTools helps debug component state
+
+## Notes
+
+- The app uses TMDb API for movie data
+- Movie IDs are TMDb numeric IDs (not IMDb IDs)
+- Heart icon shows filled when movie is in watchlist
+- Delete button uses MongoDB `_id`, not TMDb `movieId`
