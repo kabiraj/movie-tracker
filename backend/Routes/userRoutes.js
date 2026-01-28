@@ -1,5 +1,6 @@
 import express from 'express';
 import User from '../models/User.js';
+import authenticateToken from '../middleware/auth.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -59,6 +60,10 @@ router.post("/login", async (req, res) => {
     } catch (error) {
         res.status(500).json({error: error.message});
     }
+});
+
+router.get("/auth", authenticateToken, (req, res) => {
+    res.json({userId: req.userId})
 });
 
 export default router;

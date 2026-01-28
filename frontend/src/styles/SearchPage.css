@@ -98,19 +98,36 @@
     border-radius: 12px;
     overflow: hidden;
 }
-
+.movie-title {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1.5rem 1rem 1rem 1rem;
+    width: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4), transparent);
+    color: white;
+    text-align: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
 .movie-details {
     position: relative;
-    transition: transform 0.2s ease;
+    transition: all 0.2s ease;
 }
 .movie-details:hover {
-    transform: scale(1.05);
+    transform: scale(1.1);
 }
 
+.movie-details:hover .movie-title{
+    opacity: 1;
+    visibility: visible;
+}
 .movie-details button {
     border:1px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
-    background: rgb(255, 255, 255, 0.17);
+    background: rgb(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     color: var(--accent-main);
     display: flex;
@@ -135,13 +152,18 @@
     transform: scale(0.95);
     color: var(--accent-main);
 }
-.movie-grid-search img {
+.movie-details img {
     width: 100%;
     aspect-ratio: 2/3;
     object-fit: cover;
     display: block;
+    transition: box-shadow 0.3s ease;
 }
 
+.movie-details img:hover {
+    opacity: 0.8;
+    transition: box-shadow 0.3s ease;
+}
 
 
 

@@ -23,7 +23,7 @@
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
+    gap: 3rem;
     width: 100%;
 }
 
@@ -34,6 +34,11 @@
     overflow: hidden;
     position: relative;
     width: 100%;
+    transition: all 0.2s ease;
+}
+
+.movie-grid > div:hover {
+    transform: scale(1.1);
 }
 
 .movie-grid img {

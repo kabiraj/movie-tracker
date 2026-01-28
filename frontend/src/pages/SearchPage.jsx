@@ -31,7 +31,28 @@ function SearchPage() {
     useEffect(() => {
         if(!token) {
             navigate('/login')
+            return
         }
+
+        const verifyToken = async () => {
+            try {
+                const response = await fetch(`http://localhost:3000/users/auth`, {
+                    headers: {
+                        'Authorization': 'Bearer ' + token
+                    }
+                })
+
+                if (!response.ok) {
+                    localStorage.removeItem('token')
+                    navigate('/login')
+                }
+                return
+            } catch (error) {
+                console.log('error: ', error)
+                navigate('/login')
+            }
+        }
+        verifyToken()
     }, [token, navigate])
     
     // Early return to prevent rendering protected content without token
@@ -113,9 +134,12 @@ function SearchPage() {
         } catch (error) {
             console.log('error: ', error)
         }
-        
-
     }
+
+    const handleMovieClick = (movieId) => {
+        navigate(`/movies/details/${movieId}`)
+    }
+
     return (
         <div className='search-page'>
             <Navbar/>
@@ -151,10 +175,12 @@ function SearchPage() {
                             searchResults.map((movie) => (
                                 // Only render movies that have a poster image
                                 movie.poster_path && (
-                                    <div key={movie.id} className='movie-details'>
-                                        <img 
+                                    <div className='movie-details'>
+                                        <img
+                                            onClick= {() => handleMovieClick(movie.id)}key={movie.id}  
                                             src={movie.poster_path}   
                                         />
+                                        <span className='movie-title'>{movie.title}</span>
                                         {/* Heart button: filled (FaHeart) if movie is in addedMovies array, outline (FaRegHeart) otherwise */}
                                         <button onClick={() => handleAddToWatchList(movie.id)}>
                                             {addedMovies.includes(movie.id)? <FaHeart/> : <FaRegHeart/>}
