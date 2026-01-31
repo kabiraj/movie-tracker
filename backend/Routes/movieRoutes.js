@@ -112,11 +112,6 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
         let movieId = req.params.movieId;
         const TMDB_API_KEY = process.env.TMDB_API_KEY;
         
-        // Handle "tmdb-123" format by extracting just the numeric ID
-        // Some frontend implementations prefix with "tmdb-"
-        if (movieId.toString().startsWith('tmdb-')) {
-            movieId = movieId.toString().replace('tmdb-', '');
-        }
 
         // append_to_response=credits fetches cast and crew in same request
         const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits`;
@@ -146,7 +141,7 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
                 original_language: data.original_language,
                 vote_average: data.vote_average,
                 vote_count: data.vote_count,
-                cast: data.credits?.cast?.slice(0, 5) || [], // Top 5 actors
+                cast: data.credits?.cast?.slice(0, 9) || [], 
                 crew: data.credits?.crew || [],
                 production_countries: data.production_countries,
                 production_companies: data.production_companies,
@@ -200,7 +195,6 @@ router.post("/", authenticateToken, async (req, res) => {
 
         // Fetch movie details + credits from TMDb
         const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits`;
-
         const response = await fetch(tmdbUrl);
         const data = await response.json();
 
