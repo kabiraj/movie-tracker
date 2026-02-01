@@ -1,6 +1,6 @@
 
 footer {
-    background: rgba(44, 28, 30, 0.205);
+    background: #000000;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     color: var(--text-secondary);

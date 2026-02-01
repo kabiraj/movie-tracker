@@ -113,7 +113,7 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
         
 
         // append_to_response=credits fetches cast and crew in same request
-        const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits`;
+        const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits,images`;
 
         const response = await fetch(tmdbUrl);
         const data = await response.json();
@@ -130,6 +130,9 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
                 id: data.id,
                 title: data.title,
                 release_date: data.release_date,
+                logo: data.images?.logos?.find(logo => logo.iso_639_1 === 'en')?.file_path
+                        ? `https://image.tmdb.org/t/p/original${data.images.logos.find(logo => logo.iso_639_1 === 'en').file_path}`
+                        : null,
                 backdrop: data.backdrop_path
                     ? `https://image.tmdb.org/t/p/original${data.backdrop_path}` 
                     : null,

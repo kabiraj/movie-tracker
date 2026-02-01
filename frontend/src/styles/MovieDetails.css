@@ -1,20 +1,51 @@
 .movie-detail-page {
     height: 100vh;
-    background: var(--bg-dark);
+    /* background: var(--bg-dark); */
+    background: black;
     color: var(--text-primary);
 }
 .movie-details-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-    height: 70vh;
+    align-items: flex-start;
+    background-image: 
+    linear-gradient(to bottom, #000000 0%, #000000 0%, rgba(0,0,0,0) 30%),
+    linear-gradient(to right, #000000 20%, #000000 0%, rgba(0,0,0,0) 50%),
+    linear-gradient(to top, #000000 0%,  #000000 0%, rgba(0,0,0,0) 10%),
+    var(--backdrop-url);
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    max-width: 100%;
+    padding: 0 4rem 4rem 4rem;
+    height: 80vh;
+   
 }
 
-.movie-container-header {
-    padding: 2rem;
+.movie-details-header{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.movie-details-header img {
+    max-width: 30%;
+    height: auto;
+}
+
+.movie-details-header p {
+    text-align: left;
+    font-weight: var(--weight-semibold);
+    line-height: var(--line-height-subheading);
+    font-size: 1.15rem;
+    letter-spacing: var(--letter-spacing-heading);
+    opacity: 0.8;
+    max-width: 50%;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+}
+
+.movie-details-header p:hover {
+    opacity: 1;
 }

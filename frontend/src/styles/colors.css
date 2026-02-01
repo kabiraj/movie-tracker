@@ -1,6 +1,5 @@
 :root {
-  /* Background colors */
-  --bg-dark: linear-gradient(to top, #2c1c1e, #27191b, #231718, #1e1415, #1a1112, #170f10, #140c0d, #10090a, #0d0708, #080505, #040203, #000000);
+  --bg-dark: linear-gradient(to top, #000000, #0a0a0a);
   --bg-card: #ffffff;
 
   --accent-main: #e50914;

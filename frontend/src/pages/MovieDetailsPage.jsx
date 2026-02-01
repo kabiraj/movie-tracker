@@ -44,10 +44,12 @@ function MovieDetailsPage() {
                 loading? (<p>Loading...</p>)
                 : movie? (
                     <div className='movie-details-container'
-                        style={{backgroundImage: `url(${movie.backdrop})`}}
+                        style={{'--backdrop-url': `url(${movie.backdrop})`}}
                     > 
-                        <div className='movie-details-header'/>
-                        <h1>{movie.title}</h1>
+                        <div className='movie-details-header'>
+                            {movie.logo ? <img src={movie.logo}/> : <h1>{movie.title}</h1>}
+                            <p>{movie.overview}</p>
+                        </div>
                     </div>
                 )
                 : (
