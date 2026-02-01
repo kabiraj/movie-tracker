@@ -1,15 +1,16 @@
 nav {
+    font-size: 16px;
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
+    top: 0%;
+    left: 5%;
+    right: 5%;
+    width: auto;
     z-index: 1000;
     transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 nav.scrolled {
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(10px);
 }
 
@@ -26,9 +27,7 @@ nav.scrolled {
     flex-direction: row;
 }
 .nav-logo img {
-    display: flex;
-    align-items: center;
-    width: 100px;
+    width: 120px;
 }
 
 .nav-bar {
@@ -45,6 +44,9 @@ nav.scrolled {
 .nav-bar li {
     color: var(--text-primary);
     cursor: pointer;
+    font-weight: var(--weight-semibold);
+    /* letter-spacing: var(--letter-spacing-heading); */
+    letter-spacing: 0.64px;
 }
 
 .nav-bar a {
@@ -57,6 +59,5 @@ nav.scrolled {
 }
 
 .nav-bar a:hover {
-    background: rgba(229, 9, 20, 0.2);
-    color: var(--accent-main);
+    background: var(--accent-secondary);
 }

@@ -1,5 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import Navbar from '../components/Navbar'
 
 import '../styles/MovieDetails.css'
 
@@ -19,13 +20,13 @@ function MovieDetailsPage() {
                     }
                 })
         
-                if(response.ok) {
-                    const data = await response.json()
-                    setMovie(data)
+                if(!response.ok) {
                     setLoading(false)
-                } else {
-                    setLoading(false)
-                }
+                    return
+                } 
+                const data = await response.json()
+                setMovie(data)
+                setLoading(false)
             } catch (error) {
                 console.log('error: ', error)
                 setLoading(false)
@@ -38,10 +39,21 @@ function MovieDetailsPage() {
 
     return (
         <div className='movie-detail-page'>
-            <div className='movie-detail-container'>
-                {loading? (<p>Loading...</p>): movie? (<div> {movie.overview}</div>): <p>Movie not found</p>}
+            <Navbar />
+                {
+                loading? (<p>Loading...</p>)
+                : movie? (
+                    <div className='movie-details-container'
+                        style={{backgroundImage: `url(${movie.backdrop})`}}
+                    > 
+                        <div className='movie-details-header'/>
+                        <h1>{movie.title}</h1>
+                    </div>
+                )
+                : (
+                    <p>Movie not found</p>
+                )}
             </div>
-        </div>
     )
 }
 

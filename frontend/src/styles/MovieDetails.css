@@ -1,3 +1,20 @@
 .movie-detail-page {
     height: 100vh;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+}
+.movie-details-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    height: 70vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.movie-container-header {
+    padding: 2rem;
 }

@@ -96,11 +96,10 @@ router.get("/search", authenticateToken, async (req, res) => {
  * Fetches detailed information about a specific movie from TMDb API
  * 
  * Authentication: Requires valid JWT token
- * URL parameter: movieId - TMDb movie ID (can be "123" or "tmdb-123")
+ * URL parameter: movieId - TMDb movie ID 
  * 
  * Process:
  * 1. Extracts movieId from URL params
- * 2. Handles "tmdb-123" format by removing prefix
  * 3. Fetches movie details + credits from TMDb
  * 4. Transforms response to include full poster URL and formatted data
  * 
@@ -131,8 +130,11 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
                 id: data.id,
                 title: data.title,
                 release_date: data.release_date,
-                poster_path: data.poster_path 
-                    ? `https://image.tmdb.org/t/p/w500${data.poster_path}` 
+                backdrop: data.backdrop_path
+                    ? `https://image.tmdb.org/t/p/original${data.backdrop_path}` 
+                    : null,
+                poster: data.poster_path
+                    ? `https://image.tmdb.org/t/p/original${data.poster_path}` 
                     : null,
                 overview: data.overview,
                 genres: data.genres,
