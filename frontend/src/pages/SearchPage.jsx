@@ -4,6 +4,7 @@ import '../styles/SearchPage.css'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useNavigate } from 'react-router-dom'
+import { AddToWatchList } from '../utils/AddToWatchList'
 
 /**
  * SearchPage Component
@@ -89,7 +90,7 @@ function SearchPage() {
             if(!response.ok) {
                 return
             }
-            // Backend returns { results: [...] } from TMDb API
+            // Backend returns from TMDb API
             const data = await response.json()
             setSearchResults(data.results)
         } catch (error) {
@@ -97,42 +98,11 @@ function SearchPage() {
         }
         
     }
-
-    /**
-     * Handles adding a movie to user's watchlist
-     * - Sends POST request to backend with movieId (TMDb ID)
-     * - Backend fetches full movie details from TMDb and saves to database
-     * - Updates addedMovies state to show filled heart icon
-     * - Handles both 201 (new movie) and 409 (already exists) as success
-     *   because 409 means movie is already in watchlist, so UI should show it as added
-     */
     const handleAddToWatchList = async (movieId) => {
-        try {
-            const response = await fetch('http://localhost:3000/movies', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': 'Bearer ' + token
-                },
-                body: JSON.stringify({movieId: movieId})
-            })
+        const success = await AddToWatchList(movieId)
 
-            // 201 = Movie successfully added
-            if(response.ok) {
-                if(response.status === 201) {
-                    // Add movieId to addedMovies array to show filled heart
-                    setAddedMovies([...addedMovies, movieId])
-                }
-            } else {
-                // 409 = Movie already exists in watchlist
-                // Still show as added in UI (filled heart)
-                if(response.status === 409) {
-                    setAddedMovies([...addedMovies, movieId])
-                }
-            }
-            
-        } catch (error) {
-            console.log('error: ', error)
+        if(success) {
+            setAddedMovies([...addedMovies, movieId])
         }
     }
 

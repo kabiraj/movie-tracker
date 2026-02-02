@@ -60,11 +60,8 @@ export default function Navbar() {
                 </div>
                 <div className='nav-bar'>
                     <ul>
-                        {/* Link to user's watchlist/profile page */}
                         <li><Link to='/movies'>Profile</Link></li>
-                        {/* Link to search page */}
                         <li><Link to='/search'>Search</Link></li>
-                        {/* Logout: onClick removes token and navigates to login */}
                         <li onClick={handleLogout}><Link to='/login'>Logout</Link></li>
                     </ul>
                 </div>

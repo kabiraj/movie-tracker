@@ -113,7 +113,8 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
         
 
         // append_to_response=credits fetches cast and crew in same request
-        const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits,images`;
+        // release_dates provides certification (PG, PG-13, etc.)
+        const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits,images,release_dates`;
 
         const response = await fetch(tmdbUrl);
         const data = await response.json();
@@ -140,12 +141,14 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
                     ? `https://image.tmdb.org/t/p/original${data.poster_path}` 
                     : null,
                 overview: data.overview,
+                tagline: data.tagline || null,
                 genres: data.genres,
                 director: data.credits?.crew?.find(c => c.job === 'Director')?.name || null,
                 runtime: data.runtime,
                 original_language: data.original_language,
-                vote_average: data.vote_average,
+                vote_average: data.vote_average.toFixed(1),
                 vote_count: data.vote_count,
+                year: data.release_date? data.release_date.split('-')[0]: null,
                 cast: data.credits?.cast?.slice(0, 9) || [], 
                 crew: data.credits?.crew || [],
                 production_countries: data.production_countries,

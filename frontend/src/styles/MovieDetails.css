@@ -1,14 +1,14 @@
 .movie-detail-page {
-    height: 100vh;
-    /* background: var(--bg-dark); */
+    min-height: 100vh;
     background: black;
     color: var(--text-primary);
 }
-.movie-details-container{
+
+.movie-details-hero {
     align-items: flex-start;
     background-image: 
     linear-gradient(to bottom, #000000 0%, #000000 0%, rgba(0,0,0,0) 30%),
-    linear-gradient(to right, #000000 20%, #000000 0%, rgba(0,0,0,0) 50%),
+    linear-gradient(to right, #000000 10%, #000000 0%, rgba(0,0,0,0) 50%),
     linear-gradient(to top, #000000 0%,  #000000 0%, rgba(0,0,0,0) 10%),
     var(--backdrop-url);
     background-size: cover;
@@ -20,7 +20,6 @@
     max-width: 100%;
     padding: 0 4rem 4rem 4rem;
     height: 80vh;
-   
 }
 
 .movie-details-header{
@@ -31,7 +30,6 @@
 
 .movie-details-header img {
     max-width: 30%;
-    height: auto;
 }
 
 .movie-details-header p {
@@ -42,10 +40,34 @@
     letter-spacing: var(--letter-spacing-heading);
     opacity: 0.8;
     max-width: 50%;
-    transition: opacity 0.2s ease;
-    cursor: pointer;
 }
 
-.movie-details-header p:hover {
-    opacity: 1;
+.movie-details-header button{
+    border: none;
+    border-radius: 10px;
+    background-color: var(--accent-main);
+    color: var(--bg-card);
+    font-size: var(--font-subheading);
+    font-weight: var(--weight-subheading);
+    letter-spacing: var(--letter-spacing-subheading);
+    line-height: var(--lineheight-subheading);
+    outline: none;
+    width: 170px;
+    height: 50px;
+    transition: all 0.2s ease;
+}
+.movie-details-header button:hover {
+    background: var(--accent-secondary);
+}
+
+.movie-details-header button:active {
+    background: var(--accent-main);
+    transform: translateY(1px);
+}
+
+.movie-details-body {
+    border: 1px solid red;
+
+    width: 100%;
+    padding: 2rem 4rem;
 }
