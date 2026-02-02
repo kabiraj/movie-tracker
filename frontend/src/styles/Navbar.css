@@ -1,4 +1,5 @@
 nav {
+    
     border-radius: 16px;
     font-size: 16px;
     position: fixed;
@@ -11,8 +12,10 @@ nav {
 }
 
 nav.scrolled {
+    background:rgba(37, 25, 25, 0.8);
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,.3),0 8px 12px 6px rgba(0,0,0,.15);
     border-radius: 12px;
-    background: rgba(0, 0, 0, 0.6);
+
     backdrop-filter: blur(10px);
 }
 

@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 import { AddToWatchList } from '../utils/AddToWatchList'
 
 import '../styles/MovieDetails.css'
@@ -69,37 +70,79 @@ function MovieDetailsPage() {
                         > 
                             <div className='movie-details-header'>
                                 {movie.logo ? <img src={movie.logo}/> : <h1>{movie.title}</h1>}
-                                <p>{movie.tagline}</p>
-                                <button onClick ={() => {handleAddToWatchList(movie.id)}}
-                                    disabled={status === 'loading' || status === 'success' }
-                                > 
-                                    {
-                                        status == 'loading'?
-                                        'Adding...'
-                                        : status === 'success'?
-                                        'Added'
-                                        : status === 'error'?
-                                        'Try again'
-                                        :'+ Add to WatchList'
-                                    }
-                                </button>
                             </div>
                         </div>
 
                         <div className='movie-details-body'>
-                            <h1>{movie.title}</h1>
                             <div className='movie-details-info'>
-                                <p>{`IMDB ${movie.vote_average}/10`}</p>
-                                <p>{movie.year}</p>
-                                <p>{hourMinuteFormater(movie.runtime)}</p>
-                                <p>{movie.genres?.map(g => g.name).join(' | ')}</p>
-                                <p>{movie.original_language}</p>
+                                <span className='movie-details-meta-data'>{`IMDB ${movie.vote_average}/10`}</span>
+                                <span className='movie-details-seperator'>|</span>
+                                <span className='movie-details-meta-data'>{movie.year}</span>
+                                <span className='movie-details-seperator'>|</span>
+                                <span className='movie-details-meta-data'>{hourMinuteFormater(movie.runtime)}</span>
+                                <span className='movie-details-seperator'>|</span>
+                                <span className='movie-details-meta-data'>{movie.original_language}</span>
+                                <span className='movie-details-seperator'>|</span>
+                                <span className='movie-details-meta-data'>{movie.genres?.slice(0,3).map(g => g.name).join(' , ')}</span>
                             </div>
 
                             <div className='movie-details-overview'>
                                 <p>{movie.overview}</p>
                             </div>
 
+                            <button onClick ={() => {handleAddToWatchList(movie.id)}}
+                                    disabled={status === 'loading' || status === 'success' }
+                                > 
+                                    {
+                                        status === 'loading'?
+                                        'Adding...'
+                                        : status === 'success'?
+                                        '✓ Added'
+                                        : status === 'error'?
+                                        'Try again'
+                                        :'+ Add to WatchList'
+                                    }
+                                </button>
+                        </div>
+
+                        <div className='movie-details-cast-container'>
+                            <h2>Top cast</h2>
+                            <div className='movie-detail-cast-grid'>
+                                {movie.cast?.map(person => (
+                                    person.profile_path && (
+                                        <div key={person.id} className='cast-card'>
+                                            <img 
+                                                src={`https://image.tmdb.org/t/p/original${person.profile_path}`}
+                                            />
+                                            <span className='cast-name'>{person.name}</span>
+                                            <span className='cast-role'>{person.character}</span>
+                                        </div>
+                                    )
+                                ))}
+                            </div>
+
+                            <div className='movie-details-extra'>
+                                <div className='extra-info-card'>
+                                    <span className='extra-info-label'>Director</span>
+                                    <span className='extra-info-value'>{movie.director}</span>
+                                </div>
+                                <div className='extra-info-card'>
+                                    <span className='extra-info-label'>Writer</span>
+                                    <span className='extra-info-value'>{movie.writer?.map(w => (w.name)).join(', ')}</span>
+                                </div>
+                                <div className='extra-info-card'>
+                                    <span className='extra-info-label'>Budget</span>
+                                    <span className='extra-info-value'>{`$${movie.budget.toLocaleString()}`}</span>
+                                </div>
+                                <div className='extra-info-card'>
+                                    <span className='extra-info-label'>Box Office</span>
+                                    <span className='extra-info-value'>{`$${movie.revenue.toLocaleString()}`}</span>
+                                </div>
+                                <div className='extra-info-card extra-info-card-wide'>
+                                    <span className='extra-info-label'>Production Companies</span>
+                                    <span className='extra-info-value'>{movie.production_companies?.map(p => (p.name)).join(', ')}</span>
+                                </div>
+                            </div>
                         </div>
                     </>
                 )
@@ -107,6 +150,8 @@ function MovieDetailsPage() {
                     <p>Movie not found</p>
                 )
             }
+
+            <Footer/>
         </div>
     )
 }

@@ -12,18 +12,19 @@
 
   /* Text styles */
   --font-heading: 32px;
-  --font-subheading: 17px;
-  --font-body: 12px;
+  --font-subheading: 21px;
+  --font-body: 18px;
   
   --letter-spacing-heading: 0.128px;
   --letter-spacing-subheading: -0.374px;
-  --letter-spacing-body: -0.12px;
+  --letter-spacing-body: 0.05em;
 
   --lineheight-heading: 36px;
   --lineheight-subheading: 25px;
-  --lineheight-body: 16.0005px;
+  --lineheight-body: 1.5;
   
-  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-semibold: 500;
   --weight-regular: 400;
 
   --footer-bg: #fbfbfb;

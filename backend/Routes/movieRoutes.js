@@ -151,9 +151,11 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
                 year: data.release_date? data.release_date.split('-')[0]: null,
                 cast: data.credits?.cast?.slice(0, 9) || [], 
                 crew: data.credits?.crew || [],
+                writer: data.credits?.crew?.filter( c => c.job === 'Writer' || c.job === 'Screenplay') || [],
                 production_countries: data.production_countries,
                 production_companies: data.production_companies,
-                revenue: data.revenue
+                revenue: data.revenue,
+                budget: data.budget || null,
             };
             res.json(movieData);
             return;
