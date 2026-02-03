@@ -124,13 +124,24 @@ function LoginPage(){
 
     return (
         <div className='login-page'>
-            <div className='logo-container'>
+            <div className='login-logo-container'>
                     <img
                         className="login-logo"
                         src="/logo/logo.png"
                         alt="Movie Tracker logo"
                         />
+            </div>
+            <div className='login-background-section'>
+                <div className='login-poster-grid'>
+                    <img src="/movieposter/1.jpg" alt="Movie poster 1" />
+                    <img src="/movieposter/2.jpg" alt="Movie poster 2" />
+                    <img src="/movieposter/3.jpg" alt="Movie poster 3" />
+                    <img src="/movieposter/4.jpg" alt="Movie poster 4" />
+                    <img src="/movieposter/5.jpg" alt="Movie poster 5" />
+                    <img src="/movieposter/6.jpg" alt="Movie poster 6" />
+                    <img src="/movieposter/7.jpg" alt="Movie poster 7" />
                 </div>
+            </div>
             <div className='login-container'>
                 <header className="login-header">
                     <h1>Welcome back</h1>
@@ -186,7 +197,7 @@ function LoginPage(){
                     
                 </form>
             </div>
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

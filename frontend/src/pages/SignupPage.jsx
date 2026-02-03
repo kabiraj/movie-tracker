@@ -101,15 +101,13 @@ function SignUpPage() {
 
     return (
         <div className="signup-page">
-            <div className='logo-container'>
-                    <img
-                        className="signup-logo"
-                        src="/logo/logo.png"
-                        alt="Movie Tracker logo"
-                    />
-                </div>
-            <div className="signup-wrapper">
-                <div className="signup-container">
+            <img
+                className="signup-logo"
+                src="/logo/logo.png"
+                alt="Movie Tracker logo"
+            />
+            <div className="signup-container">
+                <div className="signup-form-content">
                     <form onSubmit={handleSubmit} noValidate>
                         <div className="signup-header">
                             <h1 className="signup-title">Create your account</h1>
@@ -173,15 +171,15 @@ function SignUpPage() {
                 </div>
 
                 <div className="signup-photo-section">
-                        <div className="poster-grid">
-                            <img src="/movieposter/1.jpg" alt="Movie poster 1" />
-                            <img src="/movieposter/2.jpg" alt="Movie poster 2" />
-                            <img src="/movieposter/3.jpg" alt="Movie poster 3" />
-                            <img src="/movieposter/4.jpg" alt="Movie poster 4" />
-                            <img src="/movieposter/5.jpg" alt="Movie poster 5" />
-                            <img src="/movieposter/6.jpg" alt="Movie poster 6" />
-                            <img src="/movieposter/7.jpg" alt="Movie poster 7" />
-                        </div>
+                    <div className="poster-grid">
+                        <img src="/movieposter/1.jpg" alt="Movie poster 1" />
+                        <img src="/movieposter/2.jpg" alt="Movie poster 2" />
+                        <img src="/movieposter/3.jpg" alt="Movie poster 3" />
+                        <img src="/movieposter/4.jpg" alt="Movie poster 4" />
+                        <img src="/movieposter/5.jpg" alt="Movie poster 5" />
+                        <img src="/movieposter/6.jpg" alt="Movie poster 6" />
+                        <img src="/movieposter/7.jpg" alt="Movie poster 7" />
+                    </div>
                 </div>
             </div>
         </div>

@@ -19,8 +19,8 @@
   --letter-spacing-subheading: -0.374px;
   --letter-spacing-body: 0.05em;
 
-  --lineheight-heading: 36px;
-  --lineheight-subheading: 25px;
+  --lineheight-heading: 1.1;
+  --lineheight-subheading: 1.1;
   --lineheight-body: 1.5;
   
   --weight-bold: 700;
