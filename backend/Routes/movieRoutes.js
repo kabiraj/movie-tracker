@@ -114,11 +114,10 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
 
         // append_to_response=credits fetches cast and crew in same request
         // release_dates provides certification (PG, PG-13, etc.)
-        const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits,images,release_dates`;
+        const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits,images,release_dates,videos`;
 
         const response = await fetch(tmdbUrl);
         const data = await response.json();
-        
         // TMDb returns status_code if movie not found
         if(data.status_code || !data.id){
             res.status(404).json({ error: data.status_message || "Movie not found" });
@@ -156,6 +155,9 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
                 production_companies: data.production_companies,
                 revenue: data.revenue,
                 budget: data.budget || null,
+                trailer: data.videos?.results?.find(
+                    v => v.site === 'YouTube' && v.type === 'Trailer' && (v.name.includes('official') || v.name.includes('Trailer') || v.name.includes('final'))
+                )?.key || null
             };
             res.json(movieData);
             return;

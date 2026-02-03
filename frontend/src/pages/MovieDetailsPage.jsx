@@ -62,12 +62,17 @@ function MovieDetailsPage() {
         <div className='movie-detail-page'>
             <Navbar />
             {
-                loading? (<p>Loading...</p>)
+                loading? (
+                    <div className='loading-container' role="status" aria-live="polite" aria-busy="true">
+                        <div className="loading-spinner" aria-hidden="true" />
+                        <p>Loading...</p>
+                    </div>
+                )
                 : movie? (
                     <>
                         <div className='movie-details-hero'
                             style={{'--backdrop-url': `url(${movie.backdrop})`}}
-                        > 
+                            > 
                             <div className='movie-details-header'>
                                 {movie.logo ? <img src={movie.logo}/> : <h1>{movie.title}</h1>}
                             </div>
@@ -106,7 +111,7 @@ function MovieDetailsPage() {
                         </div>
 
                         <div className='movie-details-cast-container'>
-                            <h2>Top cast</h2>
+                            <h1>Top cast</h1>
                             <div className='movie-detail-cast-grid'>
                                 {movie.cast?.map(person => (
                                     person.profile_path && (
@@ -143,7 +148,21 @@ function MovieDetailsPage() {
                                     <span className='extra-info-value'>{movie.production_companies?.map(p => (p.name)).join(', ')}</span>
                                 </div>
                             </div>
+
+                            <h1 className="trailer-label">Trailer</h1>
+
+                            <div className='movie-trailer'>
+                                <div className='movie-trailer-screen'>
+                                    <iframe
+                                        src={`https://www.youtube.com/embed/${movie.trailer}`}
+                                        title="Movie trailer"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                    /> 
+                                </div>
+                            </div> 
                         </div>
+                        
                     </>
                 )
                 : (

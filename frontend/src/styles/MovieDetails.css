@@ -4,6 +4,37 @@
     color: var(--text-primary);
 }
 
+.loading-container {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 6rem 2rem 2rem;
+    color: var(--text-primary);
+}
+
+.loading-container p {
+    opacity: 0.85;
+    font-size: var(--font-subheading);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--letter-spacing-subheading);
+}
+
+.loading-spinner {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--accent-main);
+    animation: movieDetailsSpin 0.9s linear infinite;
+}
+
+@keyframes movieDetailsSpin {
+    to { transform: rotate(360deg); }
+}
+
 .movie-details-hero {
     align-items: flex-start;
     background-image: 
@@ -49,16 +80,24 @@
     border-radius: 8px;
     background-color: var(--accent-main);
     color: var(--bg-card);
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     font-weight: var(--weight-subheading);
-    letter-spacing: var(--letter-spacing-subheading);
-    line-height: var(--lineheight-subheading);
+    letter-spacing: 0.02em;
+    line-height: 1.2;
     outline: none;
-    padding: 1.3rem;
+    padding: 0.95rem 1.4rem;
     min-height: 62px;
-    width: 250px;
+    width: auto;
+    min-width: 250px;
+    max-width: 100%;
+    white-space: nowrap;
     transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
 }
+
 .movie-details-body button:hover {
     background: var(--accent-secondary);
 }
@@ -99,7 +138,7 @@
     padding: 0 4rem 4rem 4rem;
     margin-top: 2rem;
 }
-.movie-details-cast-container h2 {
+.movie-details-cast-container h1 {
     width:fit-content;
     border-bottom: 1px solid rgb(255, 255, 255);
     margin-bottom: 1rem;
@@ -127,7 +166,6 @@
 }
 
 .cast-card:hover {
-    background: rgba(37, 25, 25, 0.5);
     border-radius: 16px;
     transform: translateY(-2px);
 }
@@ -175,26 +213,20 @@
 }
 
 .extra-info-card {
-    background: rgba(37, 25, 25, 0.6);
+    background:rgb(44, 54, 67, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    transition: all 0.3s ease;
     backdrop-filter: blur(10px);
 }
 
-.extra-info-card:hover {
-    background: rgba(37, 25, 25, 0.8);
-    border-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
+
 
 .extra-info-card-wide {
-    grid-column: 1 / -1;
+    grid-column: 1/ -1;
 }
 
 .extra-info-label {
@@ -211,6 +243,71 @@
     font-weight: var(--weight-semibold);
     color: var(--text-primary);
     line-height: 1.4;
+}
+.loading-container {
+    display: felx;
+    justify-content: center;
+    align-items: center;
+}
+.movie-trailer {
+    box-shadow: 0px 0px 130px 6px rgba(178,7,16,0.21) inset;    
+    -webkit-box-shadow: 0px 0px 130px 6px rgba(178,7,16,0.21) inset;
+    -moz-box-shadow: 0px 0px 130px 6px rgba(178,7,16,0.21) inset;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    
+}
+
+
+.trailer-label {
+    margin-top: 2rem;
+    align-self: start;
+    color: var(--text-primary);
+    font-size: var(--font-subheading);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--letter-spacing-subheading);
+    opacity: 0.9;
+}
+
+.movie-trailer-screen {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 18px;
+    overflow: hidden;
+    position: relative;
+}
+
+.movie-trailer-screen::after {
+    content: "";
+    position: absolute;
+    left: 10%;
+    right: 10%;
+    bottom: -5px;
+    height: 150px;
+    background: linear-gradient(
+        to bottom,
+        rgba(229, 9, 20, 0.3),
+        transparent
+    );
+    filter: blur(15px);
+    pointer-events: none;
+}
+
+.movie-trailer-screen iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+    padding: 13rem;
+    box-shadow:
+        0 0 22px rgba(229, 9, 20, 0.35),
+        0 0 80px rgba(229, 9, 20, 0.18);
+    
 }
 
 @media (max-width: 768px) {
