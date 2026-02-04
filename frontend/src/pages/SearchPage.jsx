@@ -114,9 +114,11 @@ function SearchPage() {
         <div className='search-page'>
             <Navbar/>
             
-            {/* Search container - centered on page */}
             <div className='search-container-wrapper'>
                 <div className='search-container'>
+                    <div className='search-hero'>
+                        <span className='search-hero-text'></span>
+                    </div>
                     <div className='logo-contaienr-search'>
                         <img src='/logo/logo.png' />
                     </div>

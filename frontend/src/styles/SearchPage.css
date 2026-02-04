@@ -8,6 +8,7 @@
 }
 
 .search-container-wrapper {
+    
     align-items: center;
     display: flex;
     flex-direction: column;
@@ -15,6 +16,7 @@
     justify-content: center;
     padding: 2rem 0;
 }
+
 
 .search-container {
     align-items: center;
@@ -26,6 +28,7 @@
 }
 
 .logo-contaienr-search img{
+
     height: auto;
     width: 300px;
 }
@@ -180,4 +183,3 @@
     color: var(--text-primary);
     opacity: 0.7;
 }
-

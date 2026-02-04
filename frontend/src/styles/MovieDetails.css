@@ -250,16 +250,15 @@
     align-items: center;
 }
 .movie-trailer {
-    box-shadow: 0px 0px 130px 6px rgba(178,7,16,0.21) inset;    
-    -webkit-box-shadow: 0px 0px 130px 6px rgba(178,7,16,0.21) inset;
-    -moz-box-shadow: 0px 0px 130px 6px rgba(178,7,16,0.21) inset;
+    border-radius: 16px;
+    box-shadow: 0px 0px 130px 6px rgb(44, 54, 67, 0.5) inset;    
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
+    padding: 5rem;
     
 }
 
@@ -275,39 +274,57 @@
 }
 
 .movie-trailer-screen {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 18px;
+    box-shadow: 0px 0px 130px 6px rgb(44, 54, 67, 0.5);
+    margin: 2rem;
+    width: 100%;         
+    max-width: 900px; 
+    margin: 0 auto 1rem;
+    height: 350px; 
     overflow: hidden;
-    position: relative;
-}
-
-.movie-trailer-screen::after {
-    content: "";
-    position: absolute;
-    left: 10%;
-    right: 10%;
-    bottom: -5px;
-    height: 150px;
-    background: linear-gradient(
-        to bottom,
-        rgba(229, 9, 20, 0.3),
-        transparent
-    );
-    filter: blur(15px);
-    pointer-events: none;
+    position: relative;   
 }
 
 .movie-trailer-screen iframe {
+    border: 0;
     width: 100%;
     height: 100%;
-    border: 0;
     display: block;
-    padding: 13rem;
-    box-shadow:
-        0 0 22px rgba(229, 9, 20, 0.35),
-        0 0 80px rgba(229, 9, 20, 0.18);
-    
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.8);
+}
+
+.movie-trailer-seats {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    align-items: center;
+    padding-bottom: 2rem;
+}
+
+.seat-row {
+    display: flex;
+    gap: 0.35rem;
+    justify-content: center;
+}
+
+.seat {
+    border-top: 5px solid rgb(178, 7, 16, 0.5);
+    width: 50px;
+    height: 20px;
+    border-radius: 100px 100px 0px 90px;
+}
+
+.seat-row-back .seat {
+    transform: scale(0.7);
+    opacity: 0.6;
+}
+
+.seat-row-middle .seat {
+    transform: scale(0.85);
+    opacity: 0.8;
+}
+
+.seat-row-front .seat {
+    transform: scale(1);
 }
 
 @media (max-width: 768px) {

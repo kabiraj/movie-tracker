@@ -95,13 +95,14 @@ function MoviesListPage() {
                 <div className='movie-grid'>
                     {
                         movies.map((movie) => (
-                            <div key={movie._id}>
+                            <div key={movie._id} className='movie-details'>
                                 {/* Movie poster from TMDb (full URL stored in database) */}
                                 <img 
                                     src={movie.poster}
                                     onClick={() => navigate(`/movies/details/${movie.movieId}`)}
                                     style={{ cursor: 'pointer' }}
                                 />
+                                <span className='movie-title'>{movie.title}</span>
                                 {/* Delete button: uses movie._id (MongoDB ID) for deletion */}
                                 <button onClick ={() => {handleDeleteBtn(movie._id)}}>
                                     <FaTrash></FaTrash>

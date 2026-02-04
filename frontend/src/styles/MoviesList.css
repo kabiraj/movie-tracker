@@ -3,7 +3,7 @@
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    padding-top: 5rem;
+    padding: 4rem;
 }
 .movie-container {
     display: flex;
@@ -14,10 +14,13 @@
     margin: 1rem;
 }
 .movie-container h1 {
-    font-size: var(--font-heading);
+    margin-top: 2rem;
+    border-bottom: 1px solid rgb(255, 255, 255);
+    margin-bottom: 1rem;
+    font-size: var(--font-subheading);
     font-weight: var(--weight-semibold);
-    letter-spacing: var(--letter-spacing-heading);
-    line-height: var(--lineheight-heading);
+    letter-spacing: var(--letter-spacing-body);
+    line-height: var(--lineheight-subheading);
     color: var(--text-primary);
 }
 .movie-grid {

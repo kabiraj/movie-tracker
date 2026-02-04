@@ -149,18 +149,67 @@ function MovieDetailsPage() {
                                 </div>
                             </div>
 
-                            <h1 className="trailer-label">Trailer</h1>
+                            {movie.trailer && (
+                                <>
+                                    <h1 className="trailer-label">Trailer</h1>
 
-                            <div className='movie-trailer'>
-                                <div className='movie-trailer-screen'>
-                                    <iframe
-                                        src={`https://www.youtube.com/embed/${movie.trailer}`}
-                                        title="Movie trailer"
-                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                        allowFullScreen
-                                    /> 
-                                </div>
-                            </div> 
+                                    <div className='movie-trailer'>
+                                        <div className='movie-trailer-screen'>
+                                            <iframe
+                                                src={`https://www.youtube.com/embed/${movie.trailer}`}
+                                                title={`${movie.title} trailer`}
+                                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                allowFullScreen
+                                            /> 
+                                        </div>
+
+                                        <div className="movie-trailer-seats">
+                                            <div className="seat-row seat-row-back">
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                            </div>
+                                            <div className="seat-row seat-row-middle">
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                            </div>
+                                            <div className="seat-row seat-row-front">
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                                <div className="seat" />
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </>
+                            )}
                         </div>
                         
                     </>
