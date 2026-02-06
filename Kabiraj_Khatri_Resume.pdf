@@ -1,0 +1,124 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 4 0 R >> >> /Contents 5 0 R >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+5 0 obj
+<< /Length 2944 >>
+stream
+BT
+/F1 11 Tf
+72 760 Td
+14 TL
+(Kabiraj Khatri) Tj
+T*
+(Melbourne, VIC | 0469 872 044 | kabirajkhatri42@gmail.com | www.linkedin.com/in/kabiraj-khatri-9b2a6716a) Tj
+T*
+T*
+(Education) Tj
+T*
+(Bachelor of Science in Computer Science \(Major: Software Engineering\) — Swinburne Institute of Technology, Melbourne) Tj
+T*
+(Mar 2024 – Present | Grades: Higher Distinction, Distinction) Tj
+T*
+(Bachelor of Engineering Technology \(Telecommunication\) — Melbourne Institute of Technology) Tj
+T*
+(Mar 2018 – Mar 2020 | GPA: 6.28) Tj
+T*
+T*
+(Projects) Tj
+T*
+(Movie Tracker App \(React, Node.js, MongoDB, TMDb API, Postman\)) Tj
+T*
+(- Built a full-stack app with JWT auth, protected routes, and user watchlists) Tj
+T*
+(- Integrated TMDb API and normalized data for posters, trailers, and cast) Tj
+T*
+(- Designed responsive UI and optimized search UX) Tj
+T*
+(- Implemented backend validation and error handling for API + DB calls) Tj
+T*
+(- Tested API routes with Postman before frontend integration) Tj
+T*
+(Online Book Reader Chrome Extension \(HTML, CSS, JavaScript\)) Tj
+T*
+(- Built a toggleable reading mode that removes distractions \(nav bars, sidebars\)) Tj
+T*
+(- Optimized text layout for long-form reading \(Kindle-style\)) Tj
+T*
+(- Improved readability for O’Reilly and documentation platforms) Tj
+T*
+(AWS Deployment Project \(EC2, VPC, S3, CloudFront, IAM, MySQL\)) Tj
+T*
+(- Deployed a website on AWS with multi-AZ setup and access controls) Tj
+T*
+(- Configured VPC, IAM roles, NACLs, and security groups) Tj
+T*
+(- Set up storage and CDN delivery using S3 + CloudFront) Tj
+T*
+T*
+(Experience) Tj
+T*
+(Customer Delivery Driver — dnata \(Melbourne Airport\)) Tj
+T*
+(2024 – Present) Tj
+T*
+(- Operated vehicles safely in a regulated airside environment, following strict procedures and daily checks) Tj
+T*
+(- Coordinated with flight crew and dispatch teams to deliver equipment on time under tight schedules) Tj
+T*
+(- Managed loading/unloading of carts and equipment, resolving discrepancies to maintain service accuracy) Tj
+T*
+(- Completed required documentation and upheld hygiene standards with attention to detail) Tj
+T*
+(- Stayed calm under pressure while prioritizing tasks across multiple time-critical deliveries) Tj
+T*
+(NBN Construction – Subcontractor) Tj
+T*
+(Mar 2024 – Present) Tj
+T*
+(- Applied structured problem-solving to resolve on-site issues under tight timelines) Tj
+T*
+(- Coordinated with contractors to align tasks, reduce rework, and meet daily targets) Tj
+T*
+(- Followed safety-critical procedures and quality standards in a high-risk environment) Tj
+T*
+(- Adapted plans when materials or site conditions changed) Tj
+T*
+T*
+(Technical Skills) Tj
+T*
+(Programming: Ruby, C#, JavaScript, HTML, CSS, PHP, C++) Tj
+T*
+(Cloud: AWS \(EC2, VPC, S3, CloudFront, IAM\)) Tj
+T*
+(Tools: Git/GitHub, Visual Studio, VS Code, CLI) Tj
+T*
+(Databases: MySQL, MongoDB) Tj
+T*
+(Practices: OOP, Functional Programming, Unit Testing) Tj
+T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000241 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+3307
+%%EOF

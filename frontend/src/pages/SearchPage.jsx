@@ -119,8 +119,9 @@ function SearchPage() {
                     <div className='search-hero'>
                         <span className='search-hero-text'></span>
                     </div>
-                    <div className='logo-contaienr-search'>
+                    <div className='logo-container-search'>
                         <img src='/logo/logo.png' />
+                        <h1>Discover and save movies you love</h1>
                     </div>
                     <form onSubmit={handleSubmit}>
                         <input 

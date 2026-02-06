@@ -98,20 +98,21 @@
 }
 
 .login-logo-container {
-    padding: 2rem 0 0 4rem;
+    padding: 1.55rem;
+    margin: 0rem 0rem 2rem 4rem;
     position: relative;
     z-index: 10;
 }
 
 .login-logo {
-    width: 196px;
+    width: 186px;
     height: auto;
     object-fit: contain;
 }
 
 .login-container {
     align-self: center;
-    background: rgba(0, 0, 0, 0.75);
+    background-color: #161616;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 16px;
@@ -121,9 +122,9 @@
     flex-direction: column;
     gap: 1.5rem;
     max-width: 500px;
-    padding: 3rem 4rem;
+    padding: 2rem 3rem;
     width: 100%;
-    height: 80vh;
+    height: 70vh;
     justify-content: center;
     position: relative;
     z-index: 10;
@@ -151,6 +152,7 @@
     letter-spacing: var(--letter-spacing-subheading);
     line-height: var(--lineheight-subheading);
     color: var(--text-secondary);
+    opacity: 0.9;
 }
 
 /* Form */
@@ -232,7 +234,8 @@
 /* Error States */
 .login-container .error-message {
     display: block;
-    font-size: 0.75rem;
+    font-size: 0.75rem; 
+    margin-top: 10px;
     color: var(--accent-secondary);
 }
 
@@ -241,7 +244,7 @@
     border-radius: 8px;
     background: rgba(229, 9, 20, 0.1);
     color: var(--accent-main);
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     padding: 0.875rem 1rem;
     text-align: center;
     margin-bottom: 0.5rem;
