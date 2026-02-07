@@ -8,7 +8,6 @@
 }
 
 .search-container-wrapper {
-    
     border-bottom-right-radius: 10%;
     border-bottom-left-radius: 10%;
     background-image: linear-gradient(to top, #431418, #341216, #250f12, #18080c, #000000);
@@ -107,6 +106,16 @@
     background: var(--accent-main);
     transform: translateY(1px);
 }
+
+.search-empty {
+    align-items: center;
+    color: var(--text-primary);
+    font-size: var(--font-heading);
+    font-weight: var(--weight-bold);
+    letter-spacing: var(--letter-spacing-heading);
+    line-height: var(--lineheight-heading);
+    padding: 2rem;
+}  
 
 .movie-grid-search {
     display: grid;

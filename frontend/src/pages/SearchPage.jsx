@@ -23,6 +23,8 @@ function SearchPage() {
     // State to track which movies have been added to watchlist
     // Used to show filled heart (FaHeart) vs outline heart (FaRegHeart)
     const [addedMovies, setAddedMovies] = useState([])
+
+    const [noResult, setNoResults] = useState(false)
     
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
@@ -73,7 +75,7 @@ function SearchPage() {
         e.preventDefault()
         // Clear previous results for new search
         setSearchResults([])
-
+        setNoResults(false);
         // Don't search if input is empty or only whitespace
         if(!keyword.trim()){
             return
@@ -88,6 +90,8 @@ function SearchPage() {
             })
     
             if(!response.ok) {
+                console.log('No movies found!')
+                setNoResults(true);
                 return
             }
             // Backend returns from TMDb API
@@ -125,11 +129,16 @@ function SearchPage() {
                     </div>
                     <form onSubmit={handleSubmit}>
                         <input 
+                            autoFocus
                             type='text' 
                             placeholder='Search for movies...' 
                             aria-label='Search Movies'
                             value = {keyword}
-                            onChange={(e) => setKeyword(e.target.value)}
+                            onChange={(e) => {
+                                setKeyword(e.target.value)
+                                setNoResults(false);
+                            }}
+                            
                         />
 
                         <div className='button-container-search'>
@@ -139,6 +148,9 @@ function SearchPage() {
                 </div>
             </div>
 
+            { noResult && (
+                <span className='search-empty'>No results for "{keyword}"</span>
+            )}
             {/* Conditionally render search results only when results exist */}
             {searchResults.length > 0 && (
                 <div className='movies-container-search'>
