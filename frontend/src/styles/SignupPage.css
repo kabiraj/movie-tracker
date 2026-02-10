@@ -34,7 +34,6 @@
     gap: 1.5rem;
     padding: 2rem;
 }
-/* Form header block */
 
 .signup-header {
     display: flex;
@@ -159,7 +158,6 @@
 
 .signup-photo-section {
     width: 80%;
-    height: 100%;
     overflow: hidden;
     position: relative;
     display: flex;
