@@ -66,17 +66,29 @@ function MoviesListPage() {
                 <div className='movie-grid'>
                     {
                         movies.map((movie) => (
-                            <div key={movie._id} className='movie-details'>
-                                <img 
-                                    src={movie.poster}
-                                    onClick={() => navigate(`/movies/details/${movie.movieId}`)}
-                                    style={{ cursor: 'pointer' }}
-                                />
-                                <span className='movie-title'>{movie.title}</span>
-                                <button onClick ={() => {handleDeleteBtn(movie._id)}}>
-                                    <FaTrash></FaTrash>
-                                </button>
-                            </div>
+                            movie.poster && (
+                                <div key ={movie._id} className='movie-details'>
+                                    <img
+                                        onClick={() => navigate(`/movies/details/${movie.movieId}`)} 
+                                        src={movie.poster}   
+                                    />
+                                    <span className='movie-title'>{movie.title}</span>
+                                    <button onClick ={() => {handleDeleteBtn(movie._id)}}>
+                                        <FaTrash></FaTrash>
+                                    </button>
+                                </div>
+                            )
+                            // <div key={movie._id} className='movie-details'>
+                            //     <img 
+                            //         src={movie.poster}
+                            //         onClick={() => navigate(`/movies/details/${movie.movieId}`)}
+                            //         style={{ cursor: 'pointer' }}
+                            //     />
+                            //     <span className='movie-title'>{movie.title}</span>
+                            //     <button onClick ={() => {handleDeleteBtn(movie._id)}}>
+                            //         <FaTrash></FaTrash>
+                            //     </button>
+                            // </div>
                         ))
                     }
                 </div>

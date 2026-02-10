@@ -6,7 +6,8 @@
     background: var(--bg-dark);
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: auto;
+    min-height: 100svh;
     width: 100%;
 }
 
@@ -95,14 +96,14 @@
 }
 
 .form-field-signup input:hover {
-    border-color: rgba(203, 209, 224, 0.3);
-    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.09);
 }
 
 .form-field-signup input:focus {
-    background: rgba(0, 0, 0, 0.3);
-    border-color: var(--accent-main);
-    box-shadow: 0 0 0 3px rgba(229, 9, 20, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
     outline: none;
     color: var(--text-primary);
 }
@@ -270,34 +271,43 @@
 .login-link{
     color: var(--accent-secondary);
 }
+
 @media (max-width: 900px) {
-    
-.signup-container {
-    justify-content: center;
-    align-items: center;
 
-}
-.signup-form-content {
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    height: 80%;
-    justify-content: center;
-    background-color: rgb(22, 22, 22, 0.7);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 16px;
-    box-shadow: 0 4px 4px 0 rgba(0,0,0,.3),0 8px 12px 6px rgba(0,0,0,.15);
-}
-
-.signup-photo-section {
-    display: none;
-}
-}
-
-@media (max-width: 600px) {
- 
-    .signup-wrapper {
-        width: 90%;
+    .signup-container {
+        padding: 0;
+        justify-content: center;
+        align-items: center;
+        flex: 0;
     }
+
+    .signup-form-content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .signup-photo-section {
+        display: none;
+    }
+
+    .form-field-signup .error-message {
+        margin-top: 0.2rem;
+        font-size: 0.75rem;
+    }
+
+    .signup-form-content form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+
+    .signup-logo {
+        width: 140px;
+        margin-top: 2rem;
+        padding: 1rem;
+    }
+    
 }

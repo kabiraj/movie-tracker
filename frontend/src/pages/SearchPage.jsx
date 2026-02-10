@@ -134,7 +134,7 @@ function SearchPage() {
                         {
                             searchResults.map((movie) => (
                                 movie.poster_path && (
-                                    <div className='movie-details'>
+                                    <div key={movie._id} className='movie-details'>
                                         <img
                                             onClick= {() => handleMovieClick(movie.id)}key={movie.id}  
                                             src={movie.poster_path}   

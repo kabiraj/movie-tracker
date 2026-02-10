@@ -5,7 +5,7 @@
 }
 
 .loading-container {
-    min-height: calc(100vh - 80px);
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -197,7 +197,7 @@
 }
 
 .cast-role {
-    font-size: 0.875rem;
+    font-size: 0.8rem;
     opacity: 0.7;
     text-align: center;
     color: var(--text-secondary);
@@ -327,12 +327,111 @@
     transform: scale(1);
 }
 
-@media (max-width: 768px) {
-    .movie-details-extra {
-        grid-template-columns: 1fr;
+@media (max-width: 900px) {
+
+    .movie-details-hero {
+        padding: 0;
+        height: 50vh;
     }
     
-    .extra-info-card-wide {
-        grid-column: 1;
+    .movie-details-header{
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
     }
+    
+    .movie-details-header img {
+        max-width: 70%;
+    }
+    
+    .movie-details-body {
+        gap: 0.5rem;
+        padding: 0rem;
+    }
+    
+    
+    .movie-details-body button{
+        margin-top: 1rem;
+        align-self: center;
+        max-width: 100%;
+    }
+    
+    .movie-details-info {
+        padding: 1rem;
+        align-items: center;
+        column-gap: 0.2rem;
+    }
+    
+    .movie-details-meta-data {
+        font-size: 11px;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .movie-details-seperator {
+        margin: 0;  
+    }
+    
+    .movie-details-overview p {
+        padding: 0 0 0 1rem;
+        font-size: var(--font-mobile-body);
+        font-weight: var(--weight-semibold);
+        opacity: 0.9;
+        width: 100%;
+    }
+    
+    .movie-details-cast-container {
+        padding: 0.9rem;
+    }
+
+    .movie-details-cast-container h1 {
+        margin-bottom: 1rem;
+        font-size: var(--font-mobile-subheading);
+    }
+    
+    .movie-detail-cast-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    .cast-card {
+        gap: 0.35rem;
+        padding: 0.5rem;
+    }
+    
+    .cast-card img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .cast-name {
+        font-size: var(--font-mobile-body);
+    }
+    
+    .movie-details-extra {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.25rem;
+        margin-top: 2rem;
+    }
+
+    .movie-trailer {
+        padding: 1rem;
+        
+    }
+    .trailer-label {
+        font-size: var(--font-mobile-subheading);
+    }
+    
+    .movie-trailer-seats {
+        gap: 0.4rem;
+        padding-bottom: 2rem;
+    }
+    
+    .seat {
+        width: 20px;
+        height: 10px;
+    }
+    
 }

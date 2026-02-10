@@ -83,3 +83,25 @@
 .movie-grid button:active {
     transform: scale(0.95)
 }
+
+@media (max-width: 714px) {
+
+    .movie-container {
+        width: 100%;
+        margin: 5rem auto 3rem auto;
+        padding: 1rem;
+    }
+    
+    .movie-container h1 {
+        font-size: var(--font-mobile-subheading);
+    }
+
+    .movie-grid > div {
+        height: auto;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 30px;
+    }
+}

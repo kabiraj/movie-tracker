@@ -15,6 +15,11 @@
   --font-subheading: 20px;
   --font-body: 16px;
   
+    /* Text styles for mobile phones*/
+    --font-mobile-heading: 24px;
+    --font-mobile-subheading: 16px;
+    --font-mobile-body: 14px;
+  
   --letter-spacing-heading: 0.128px;
   --letter-spacing-subheading: -0.374px;
   --letter-spacing-body: 0.05em;

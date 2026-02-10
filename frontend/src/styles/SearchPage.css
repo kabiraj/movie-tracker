@@ -216,3 +216,80 @@
     font-size: var(--font-subheading);
     opacity: 0.7;
 }
+
+/* Responsive design for mobile phones*/
+
+@media (max-width: 900px) {
+    .search-page {
+        min-height: 100svh;
+        padding-top: 0rem;
+    }
+    
+    .search-container-wrapper {
+        border-radius: 0;
+        flex-grow: 0;
+        padding: 0;
+    }
+    
+    .search-container {
+        width: 100%;
+    }
+    
+    .logo-container-search img{
+        display: none;
+    }
+    
+    .logo-container-search h1{
+        text-align: center;
+        opacity: 0.8;
+        font-size: 1.7rem;
+        font-weight: var(--weight-bold);
+        letter-spacing: var(--letter-spacing-heading);
+        line-height: var(--lineheight-heading);
+    }
+
+    .search-container form {
+        gap: 1.5rem;
+    }
+    
+    .search-container input {
+        font-size: 16px;
+    }
+    
+
+    .search-container button {
+        font-size: 16px;
+    }
+    
+    .search-empty {
+        font-size: var(--font-subheading);
+        font-weight: var(--weight-bold);
+        letter-spacing: var(--letter-spacing-subheading);
+        line-height: var(--lineheight-subheading);
+        padding: 1rem;
+    }  
+    
+    .movie-grid-search {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 20px;
+        width: 100%;
+    }
+    
+    .movie-grid-search > div {
+        height: auto;
+    }
+    
+    .movie-details button {
+        right: 10px;
+        height: 26px;
+        width: 26px;
+    }
+    
+    .movie-details button:hover {
+        background: var(--accent-main);
+        transform: scale(1.1);
+        color: white;
+    }
+
+}
