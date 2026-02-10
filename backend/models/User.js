@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 
+// one user: name, email, and hashed password. email must be unique.
 const userSchema = new mongoose.Schema({
     fullName : {
         type: String,

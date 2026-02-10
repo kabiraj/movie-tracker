@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/SignupPage.css'
 import { API_BASE } from '../config'
+import { Link } from 'react-router-dom'
 
 function SignUpPage() {
     const [fullName, setFullName] = useState('')
@@ -16,7 +17,6 @@ function SignUpPage() {
 
     const navigate = useNavigate()
 
-    // Validates inputs before submitting to the API
     function validateForm() {
         const newErrors = {
             fullName: '',
@@ -30,7 +30,6 @@ function SignUpPage() {
             isValid = false;
         }
 
-        // Email validation
         if (!email.trim()) {
             newErrors.email = 'Email is required'
             isValid = false
@@ -45,7 +44,6 @@ function SignUpPage() {
             }
         }
 
-        // Password validation
         if (!password.trim()) {
             newErrors.password = 'Password is required'
             isValid = false
@@ -71,7 +69,6 @@ function SignUpPage() {
 
     }
 
-    // Submits form data to the backend and handles errors
     const handleSubmit = async (e) => {
         e.preventDefault()
 
@@ -116,7 +113,6 @@ function SignUpPage() {
                                 Track favorites, build watchlists, and enjoy
                             </p>
                         </div>
-                        {/* Server-side error (e.g., email already exists) */}
                         {errors.general && (
                             <span className='error-message-server'>! {errors.general}</span>
                         )}
@@ -167,6 +163,11 @@ function SignUpPage() {
                         </div>
                         <div className="form-field-signup">
                             <button type="submit">Sign up</button>
+                        </div>
+
+                        <div class='login-option-container'>
+                            <p>Already have an account?</p>
+                            <Link to="/login" className="login-link">Login</Link>
                         </div>
                     </form>
                 </div>

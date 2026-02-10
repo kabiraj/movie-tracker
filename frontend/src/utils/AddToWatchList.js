@@ -1,5 +1,6 @@
 import { API_BASE } from '../config'
 
+// call the backend to save this movie to the current user's list. returns true if it worked or already saved.
 export const AddToWatchList = async (movieId) => {
     const token = localStorage.getItem('token')
 

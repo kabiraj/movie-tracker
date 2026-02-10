@@ -7,31 +7,15 @@ import { useNavigate } from 'react-router-dom'
 import { AddToWatchList } from '../utils/AddToWatchList'
 import { API_BASE } from '../config'
 
-/**
- * SearchPage Component
- * Main page where users search for movies and add them to their watchlist
- * - Displays search bar with logo
- * - Shows search results in a grid layout
- * - Allows users to add movies to watchlist via heart icon
- */
+// search for movies and add them to your list with the heart. we check the token first and redirect to login if not logged in.
 function SearchPage() {
-    // State for search input field
     const [keyword, setKeyword] = useState('')
-    
-    // State to store search results from TMDb API
     const [searchResults, setSearchResults] = useState([])
-    
-    // State to track which movies have been added to watchlist
-    // Used to show filled heart (FaHeart) vs outline heart (FaRegHeart)
     const [addedMovies, setAddedMovies] = useState([])
-
     const [noResult, setNoResults] = useState(false)
-    
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
 
-    // Route protection: Redirect to login if no token exists
-    // Runs on component mount and when token/navigate changes
     useEffect(() => {
         if(!token) {
             navigate('/login')
@@ -59,19 +43,10 @@ function SearchPage() {
         verifyToken()
     }, [token, navigate])
     
-    // Early return to prevent rendering protected content without token
     if (!token) {
         return null
     }
 
-    /**
-     * Handles search form submission
-     * - Prevents default form behavior (page refresh)
-     * - Clears previous search results
-     * - Validates that keyword is not empty
-     * - Fetches movies from backend search endpoint
-     * - Updates searchResults state with TMDb API response
-     */
     const handleSubmit = async (e) => {
         e.preventDefault()
         // Clear previous results for new search
@@ -152,14 +127,12 @@ function SearchPage() {
             { noResult && (
                 <span className='search-empty'>No results for "{keyword}"</span>
             )}
-            {/* Conditionally render search results only when results exist */}
             {searchResults.length > 0 && (
                 <div className='movies-container-search'>
                     <h1>Search results</h1>
                     <div className='movie-grid-search'>
                         {
                             searchResults.map((movie) => (
-                                // Only render movies that have a poster image
                                 movie.poster_path && (
                                     <div className='movie-details'>
                                         <img
@@ -167,7 +140,6 @@ function SearchPage() {
                                             src={movie.poster_path}   
                                         />
                                         <span className='movie-title'>{movie.title}</span>
-                                        {/* Heart button: filled (FaHeart) if movie is in addedMovies array, outline (FaRegHeart) otherwise */}
                                         <button onClick={() => handleAddToWatchList(movie.id)}>
                                             {addedMovies.includes(movie.id)? <FaHeart/> : <FaRegHeart/>}
                                         </button>

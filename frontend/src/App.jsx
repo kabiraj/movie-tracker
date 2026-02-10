@@ -1,23 +1,18 @@
 import './App.css'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import MovieDetailsPage from '../src/pages/MovieDetailsPage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
 import MoviesListPage from './pages/MoviesListPage'
 import SearchPage from './pages/SearchPage'
 
-/**
- * App Component
- * Root component that sets up React Router and defines all routes
- * - BrowserRouter enables client-side routing
- * - Routes define URL paths and their corresponding page components
- * - No route protection here - each page handles its own authentication
- */
+// all the routes. each page checks on its own if the user is logged in (except login/signup).
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/movies" element={<MoviesListPage />} />

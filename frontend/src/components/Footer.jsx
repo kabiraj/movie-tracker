@@ -1,11 +1,6 @@
 import '../styles/Footer.css'
 
-/**
- * Footer Component
- * Simple footer displayed on all pages
- * - Shows copyright and API credit
- * - Fixed position at bottom of viewport
- */
+// small footer at the bottom with copyright and tmdb credit
 export default function Footer() {
     return (
         <footer>

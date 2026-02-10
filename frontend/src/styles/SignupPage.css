@@ -253,6 +253,24 @@
 }
 /* Responsive Design */
 
+
+.login-option-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.login-option-container p {
+    color: var(--text-secondary);
+    font-size: var(--font-body);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--letter-spacing-subheading);
+    line-height: var(--lineheight-subheading);
+}
+.login-link{
+    color: var(--accent-secondary);
+}
 @media (max-width: 900px) {
     .signup-photo-section {
         display: none;

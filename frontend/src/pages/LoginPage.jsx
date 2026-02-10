@@ -4,21 +4,10 @@ import '../styles/LoginPage.css'
 import Footer from '../components/Footer'
 import { API_BASE } from '../config'
 
-/**
- * LoginPage Component
- * Handles user authentication
- * - Validates email and password format
- * - Sends credentials to backend for authentication
- * - Stores JWT token in localStorage on success
- * - Redirects to search page after successful login
- */
+// login form. we validate email and password then call the backend. if it succeeds we save the token and send them to search.
 function LoginPage(){
-    // Form input state
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    
-    // Error state for form validation
-    // Separate fields for email, password, and general errors
     const [errors, setErrors] = useState({
         email: '',
         password: '',
@@ -26,18 +15,10 @@ function LoginPage(){
     })
     const navigate = useNavigate()
 
-    /**
-     * Validates form fields before submission
-     * - Email: must contain @ and valid domain
-     * - Password: must be at least 8 characters
-     * - Returns true if valid, false otherwise
-     * - Updates errors state with validation messages
-     */
     const validateForm = () => {
         const newErrors = { email: '', password: '', general: '' }
         let isValid = true
 
-        // Email validation
         if (!email.trim()) {
             newErrors.email = 'Email is required'
             isValid = false
@@ -52,7 +33,6 @@ function LoginPage(){
             }
         }
 
-        // Password validation
         if (!password.trim()) {
             newErrors.password = 'Password is required'
             isValid = false
@@ -65,30 +45,15 @@ function LoginPage(){
         return isValid
     }
 
-    /**
-     * Handles form submission and API authentication
-     * - Prevents default form submission (page refresh)
-     * - Clears previous errors
-     * - Validates form fields
-     * - Sends credentials to backend
-     * - Stores JWT token in localStorage on success
-     * - Redirects to search page
-     * - Displays error messages for failed login
-     */
     const handleSubmit = async (e) => {
         e.preventDefault()
-
-        // Clear previous errors before new validation
         setErrors({ email: '', password: '', general: '' })
 
-        // Validate form before making API call
-        // Prevents unnecessary network requests
         if (!validateForm()) {
             return
         }
 
         try {
-            // Send login credentials to backend
             const response = await fetch(API_BASE + '/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -97,7 +62,6 @@ function LoginPage(){
 
             const data = await response.json()
 
-            // Handle server errors (invalid credentials, user not found, etc.)
             if (!response.ok) {
                 setErrors({
                     email: '',
@@ -107,14 +71,9 @@ function LoginPage(){
                 return
             }
 
-            // Save JWT token to localStorage
-            // Token is used for authenticated API requests
             localStorage.setItem('token', data.passwordToken)
-            
-            // Redirect to search page after successful login
             navigate('/search')
         } catch {
-            // Handle network errors (server down, no internet, etc.)
             setErrors({
                 email: '',
                 password: '',
@@ -152,7 +111,6 @@ function LoginPage(){
                     {errors.general && (
                         <div className="error-message general">{errors.general}</div>
                     )}
-                    {/* Email input field */}
                     <div className="form-field-login">
                         <label htmlFor="email-input">Email</label>
                         <input 
@@ -161,18 +119,15 @@ function LoginPage(){
                             value={email}
                             onChange={(e) => {
                                 setEmail(e.target.value)
-                                // Clear email error when user starts typing
                                 setErrors((prevErrors) => ({...prevErrors, email:""}))
                             }}
                             className={errors.email ? 'error' : ''}
                         />
-                        {/* Display email validation error */}
                         {errors.email && (
                             <span className="error-message">{errors.email}</span>
                         )}
                     </div>
                     
-                    {/* Password input field */}
                     <div className="form-field-login">
                         <label htmlFor="password-input">Password</label>
                         <input 
@@ -181,12 +136,10 @@ function LoginPage(){
                             value={password}
                             onChange={(e) => {
                                 setPassword(e.target.value)
-                                // Clear password error when user starts typing
                                 setErrors((prevErrors) => ({...prevErrors, password: ''}))
                             }}
                             className={errors.password ? 'error' : ''}
                         />
-                        {/* Display password validation error */}
                         {errors.password && (
                             <span className="error-message">{errors.password}</span>
                         )}
