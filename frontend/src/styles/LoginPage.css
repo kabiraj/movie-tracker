@@ -23,79 +23,44 @@
     overflow: hidden;
 }
 
-.login-background-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        to bottom,
-        rgba(0, 0, 0, 0.8) 0%,
-        rgba(0, 0, 0, 0.6) 50%,
-        rgba(0, 0, 0, 0.8) 100%
-    );
-    z-index: 2;
-    pointer-events: none;
-}
 
 .login-poster-grid {
     position: relative;
     width: 100%;
     height: 100%;
-    filter: blur(3px);
-    opacity: 0.4;
+    opacity: 0.3;
 }
 
 .login-poster-grid img {
     position: absolute;
     object-fit: cover;
     border-radius: 12px;
-    opacity: 0.7;
 }
 
 .login-poster-grid img:nth-child(1) {
     left: 0%;
-    top: 10%;
-    width: 45%;
+    top: 0%;
+    width: 40%;
 }
 
 .login-poster-grid img:nth-child(2) {
     top: 0%;
-    right: 5%;
-    width: 58%;
+    right: 0%;
+    width: 40%;
 }
 
 .login-poster-grid img:nth-child(3) {
-    top: 36%;
-    left: 2%;
-    width: 46%;
+    top: 60%;
+    left: 0%;
+    width: 40%;
 }
 
 .login-poster-grid img:nth-child(4) {
-    top: 52%;
-    right: 8%;
-    width: 20%;
-}
-
-.login-poster-grid img:nth-child(5) {
-    top: 62%;
-    left: 0%;
-    width: 54%;
-}
-
-.login-poster-grid img:nth-child(6) {
-    top: 70%;
+    top: 60%;
     right: 0%;
-    width: 50%;
+    width: 40%;
 }
 
-.login-poster-grid img:nth-child(7) {
-    top: 40%;
-    left: 40%;
-    width: 35%;
-}
 
 .login-logo-container {
     padding: 1.55rem;
@@ -112,7 +77,7 @@
 
 .login-container {
     align-self: center;
-    background-color: #161616;
+    background-color: rgb(22, 22, 22, 0.7);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-radius: 16px;
@@ -249,6 +214,24 @@
     text-align: center;
     margin-bottom: 0.5rem;
 }
+.signup-option-container{
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.signup-option-container p {
+    color: var(--text-secondary);
+    font-size: var(--font-body);
+    font-weight: var(--weight-regular);
+    letter-spacing: var(--letter-spacing-subheading);
+    line-height: var(--lineheight-subheading);
+}
+.signup-link{
+    color: var(--accent-secondary);
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -262,7 +245,7 @@
 
     .login-container {
         padding: 2rem;
-        max-width: 90%;
+        max-width: 80%;
     }
 }
 

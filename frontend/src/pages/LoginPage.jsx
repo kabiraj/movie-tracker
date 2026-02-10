@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/LoginPage.css'
-import Footer from '../components/Footer'
+import { Link } from 'react-router-dom'
 import { API_BASE } from '../config'
 
 // login form. we validate email and password then call the backend. if it succeeds we save the token and send them to search.
@@ -97,9 +97,6 @@ function LoginPage(){
                     <img src="/movieposter/2.jpg" alt="Movie poster 2" />
                     <img src="/movieposter/3.jpg" alt="Movie poster 3" />
                     <img src="/movieposter/4.jpg" alt="Movie poster 4" />
-                    <img src="/movieposter/5.jpg" alt="Movie poster 5" />
-                    <img src="/movieposter/6.jpg" alt="Movie poster 6" />
-                    <img src="/movieposter/7.jpg" alt="Movie poster 7" />
                 </div>
             </div>
             <div className='login-container'>
@@ -147,11 +144,14 @@ function LoginPage(){
                     <div className="form-field-login"> 
                         <button type="submit">Login</button>
                     </div>
-
+                    
+                    <div class='signup-option-container'>
+                        <p>Don't have an account?</p>
+                        <Link to="/signup" className="signup-link">Signup</Link>
+                    </div>
                     
                 </form>
             </div>
-            {/* <Footer /> */}
         </div>
     )
 }
