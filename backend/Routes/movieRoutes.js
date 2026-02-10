@@ -23,7 +23,7 @@ router.get("/", authenticateToken, async (req, res) => {
         res.json(movies);
         return;
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: 'Something went wrong. Please try again.' });
         return;
     }
 });
@@ -85,7 +85,7 @@ router.get("/search", authenticateToken, async (req, res) => {
         res.json({ results: transformedResults });
         return;
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: 'Something went wrong. Please try again.' });
         return;
     }
 });
@@ -145,8 +145,8 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
                 director: data.credits?.crew?.find(c => c.job === 'Director')?.name || null,
                 runtime: data.runtime,
                 original_language: data.original_language,
-                vote_average: data.vote_average.toFixed(1),
-                vote_count: data.vote_count,
+                vote_average: data.vote_average != null ? Number(data.vote_average).toFixed(1) : null,
+                vote_count: data.vote_count ?? null,
                 year: data.release_date? data.release_date.split('-')[0]: null,
                 cast: data.credits?.cast?.slice(0, 9) || [], 
                 crew: data.credits?.crew || [],
@@ -164,7 +164,7 @@ router.get("/details/:movieId", authenticateToken, async (req, res) => {
         }
 
     } catch (error) {
-        res.status(500).json({error: error.message});
+        res.status(500).json({ error: 'Something went wrong. Please try again.' });
     }
 });
 
@@ -269,7 +269,7 @@ router.post("/", authenticateToken, async (req, res) => {
         if (error?.code === 11000) {
             return res.status(409).json({ error: "Movie already saved" });
         }
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: 'Something went wrong. Please try again.' });
         return;
     }
 });
@@ -305,15 +305,17 @@ router.delete("/:id", authenticateToken, async (req, res) => {
         );
         
         if(!deletedMovie) {
-            // Movie not found or doesn't belong to user
+            // Movie not found or doesn't belong to user (or invalid ObjectId)
             return res.status(404).json({ error: "Movie not found"});
-        } else {
-            res.status(200).json({message: "Movie deleted successfully"});
-            return;
         }
-        
+        res.status(200).json({message: "Movie deleted successfully"});
+        return;
     } catch (error) {
-        res.status(500).json({error: error.message});
+        // Invalid MongoDB ObjectId format (e.g. non-24-char hex)
+        if (error?.name === 'CastError') {
+            return res.status(404).json({ error: "Movie not found" });
+        }
+        res.status(500).json({ error: 'Something went wrong. Please try again.' });
         return;
     }
 } );

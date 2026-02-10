@@ -1,9 +1,10 @@
+import { API_BASE } from '../config'
 
 export const AddToWatchList = async (movieId) => {
     const token = localStorage.getItem('token')
 
     try {
-        const response = await fetch('http://localhost:3000/movies', {
+        const response = await fetch(API_BASE + '/movies', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

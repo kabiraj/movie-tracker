@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { AddToWatchList } from '../utils/AddToWatchList'
+import { API_BASE } from '../config'
 
 import '../styles/MovieDetails.css'
 
@@ -17,7 +18,7 @@ function MovieDetailsPage() {
     useEffect(() => {
         const fetchMovieDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/movies/details/${movieId}`, {
+                const response = await fetch(`${API_BASE}/movies/details/${movieId}`, {
                     headers: {
                         'Authorization': 'Bearer ' + token
                     }
@@ -28,6 +29,7 @@ function MovieDetailsPage() {
                     return
                 } 
                 const data = await response.json()
+                console.log(data)
                 setMovie(data)
                 setLoading(false)
             } catch (error) {
@@ -71,7 +73,7 @@ function MovieDetailsPage() {
                 : movie? (
                     <>
                         <div className='movie-details-hero'
-                            style={{'--backdrop-url': `url(${movie.backdrop})`}}
+                            style={{'--backdrop-url': movie.backdrop ? `url(${movie.backdrop})` : 'none'}}
                             > 
                             <div className='movie-details-header'>
                                 {movie.logo ? <img src={movie.logo}/> : <h1>{movie.title}</h1>}
@@ -80,11 +82,11 @@ function MovieDetailsPage() {
 
                         <div className='movie-details-body'>
                             <div className='movie-details-info'>
-                                <span className='movie-details-meta-data'>{`IMDB ${movie.vote_average}/10`}</span>
+                                <span className='movie-details-meta-data'>{movie.vote_average != null ? `IMDB ${movie.vote_average}/10` : '—'}</span>
                                 <span className='movie-details-seperator'>|</span>
                                 <span className='movie-details-meta-data'>{movie.year}</span>
                                 <span className='movie-details-seperator'>|</span>
-                                <span className='movie-details-meta-data'>{hourMinuteFormater(movie.runtime)}</span>
+                                <span className='movie-details-meta-data'>{movie.runtime != null ? hourMinuteFormater(movie.runtime) : '—'}</span>
                                 <span className='movie-details-seperator'>|</span>
                                 <span className='movie-details-meta-data'>{movie.original_language}</span>
                                 <span className='movie-details-seperator'>|</span>
@@ -92,7 +94,7 @@ function MovieDetailsPage() {
                             </div>
 
                             <div className='movie-details-overview'>
-                                <p>{movie.overview}</p>
+                                <p>{movie.overview ?? 'No overview available.'}</p>
                             </div>
 
                             <button onClick ={() => {handleAddToWatchList(movie.id)}}
@@ -137,11 +139,19 @@ function MovieDetailsPage() {
                                 </div>
                                 <div className='extra-info-card'>
                                     <span className='extra-info-label'>Budget</span>
-                                    <span className='extra-info-value'>{`$${movie.budget.toLocaleString()}`}</span>
+                                    <span className='extra-info-value'>
+                                        {movie.budget != null && movie.budget > 0
+                                            ? `$${Number(movie.budget).toLocaleString()}`
+                                            : '—'}
+                                    </span>
                                 </div>
                                 <div className='extra-info-card'>
                                     <span className='extra-info-label'>Box Office</span>
-                                    <span className='extra-info-value'>{`$${movie.revenue.toLocaleString()}`}</span>
+                                    <span className='extra-info-value'>
+                                        {movie.revenue != null && movie.revenue > 0
+                                            ? `$${Number(movie.revenue).toLocaleString()}`
+                                            : '—'}
+                                    </span>
                                 </div>
                                 <div className='extra-info-card extra-info-card-wide'>
                                     <span className='extra-info-label'>Production Companies</span>

@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { useNavigate } from 'react-router-dom'
 import { AddToWatchList } from '../utils/AddToWatchList'
+import { API_BASE } from '../config'
 
 /**
  * SearchPage Component
@@ -39,7 +40,7 @@ function SearchPage() {
 
         const verifyToken = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/users/auth`, {
+                const response = await fetch(`${API_BASE}/users/auth`, {
                     headers: {
                         'Authorization': 'Bearer ' + token
                     }
@@ -83,7 +84,7 @@ function SearchPage() {
 
         try {
             // Call backend search endpoint with query parameter
-            const response = await fetch('http://localhost:3000/movies/search?query=' + keyword, {
+            const response = await fetch(API_BASE + '/movies/search?query=' + encodeURIComponent(keyword), {
                 headers: {
                     'Authorization' : 'Bearer ' + token
                 }

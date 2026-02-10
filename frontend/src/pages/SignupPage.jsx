@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/SignupPage.css'
+import { API_BASE } from '../config'
 
 function SignUpPage() {
     const [fullName, setFullName] = useState('')
@@ -81,7 +82,7 @@ function SignUpPage() {
         }
 
         try {
-            const response = await fetch('http://localhost:3000/users/signup', {
+            const response = await fetch(API_BASE + '/users/signup', {
                 method: 'POST',
                 headers: {'Content-type' : 'application/json'},
                 body: JSON.stringify({fullName, email, password})

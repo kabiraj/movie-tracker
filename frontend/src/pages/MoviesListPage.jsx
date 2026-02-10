@@ -4,6 +4,7 @@ import { FaTrash, FaTrashAlt } from 'react-icons/fa'
 import Navbar from '../components/Navbar'
 import '../styles/MoviesList.css'
 import Footer from '../components/Footer'
+import { API_BASE } from '../config'
 
 /**
  * MoviesListPage Component
@@ -35,7 +36,7 @@ function MoviesListPage() {
          * Backend uses token to identify user and returns only their movies
          */
         const fetchedMovies = async () => {
-            const response = await fetch('http://localhost:3000/movies', {
+            const response = await fetch(API_BASE + '/movies', {
                 headers: {
                     'Authorization' : `Bearer ${token}`
                 }
@@ -69,7 +70,7 @@ function MoviesListPage() {
      */
     const handleDeleteBtn = async (movieId) => {
         try {
-            const response = await fetch(`http://localhost:3000/movies/${movieId}`, {
+            const response = await fetch(`${API_BASE}/movies/${movieId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': 'Bearer ' + token

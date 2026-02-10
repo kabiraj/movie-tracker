@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../styles/LoginPage.css'
 import Footer from '../components/Footer'
+import { API_BASE } from '../config'
 
 /**
  * LoginPage Component
@@ -88,7 +89,7 @@ function LoginPage(){
 
         try {
             // Send login credentials to backend
-            const response = await fetch('http://localhost:3000/users/login', {
+            const response = await fetch(API_BASE + '/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, password })

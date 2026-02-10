@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
 /**
- * Movie Schema
- * Defines the structure of movie documents in MongoDB
+    Movie Schema
+    Defines the structure of movie documents in MongoDB
  * 
  * Key fields:
  * - movieId: TMDb movie ID (not MongoDB _id)

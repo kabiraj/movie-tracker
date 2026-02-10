@@ -3,18 +3,19 @@ nav {
     font-size: 16px;
     position: fixed;
     top: 0%;
-    left: 5%;
-    right: 5%;
-    width: auto;
+    left: 4%;
+    right: 4%;
     z-index: 1000;
     transition: background 0.3s ease, backdrop-filter 0.3s ease;
 }
 
 nav.scrolled {
-    background:rgb(44, 54, 67, 0.5);
-    box-shadow: 0 4px 4px 0 rgba(0,0,0,.3),0 8px 12px 6px rgba(0,0,0,.15);
+    background: rgba(12, 12, 12, 0.92);              /* subtle dark glass */
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.85),              /* soft drop shadow */
+        0 1px 0 rgba(255, 255, 255, 0.02);           /* tiny top highlight */
     border-radius: 12px;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(14px);                     /* stronger blur, no border */
 }
 
 .nav-container {
@@ -22,13 +23,14 @@ nav.scrolled {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 1rem;
+    padding: 0.7rem;
 }
 
 .nav-logo {
     display: flex;
     flex-direction: row;
 }
+
 .nav-logo img {
     width: 120px;
 }
@@ -36,6 +38,7 @@ nav.scrolled {
 .nav-bar {
     margin: 0 3rem;
 }
+
 .nav-bar ul {
     align-items: center;
     color: var(--text-primary);

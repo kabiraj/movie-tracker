@@ -43,8 +43,8 @@ const authenticateToken = (req, res, next) => {
                 // Call next() to proceed to the actual route handler
                 next();
             } catch (error) {
-                // Token invalid, expired, or malformed
-                res.status(401).json({ error: error.message });
+                // Token invalid, expired, or malformed — don't leak details to client
+                res.status(401).json({ error: 'Unauthorized' });
                 return;
             }
         }
