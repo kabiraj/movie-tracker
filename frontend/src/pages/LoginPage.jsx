@@ -8,6 +8,7 @@ import { API_BASE } from '../config'
 function LoginPage(){
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [ status, setStatus ] = useState('idle')
     const [errors, setErrors] = useState({
         email: '',
         password: '',
@@ -54,6 +55,7 @@ function LoginPage(){
         }
 
         try {
+            setStatus('submitting')
             const response = await fetch(API_BASE + '/users/login', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -70,7 +72,7 @@ function LoginPage(){
                 })
                 return
             }
-
+            setStatus("success")
             localStorage.setItem('token', data.passwordToken)
             navigate('/search')
         } catch {
@@ -142,7 +144,14 @@ function LoginPage(){
                         )}
                     </div>
                     <div className="form-field-login"> 
-                        <button type="submit">Login</button>
+                        <button type="submit" disabled = {status === "submitting" || status === "success"}>
+                            {
+                                status === "submitting"?
+                                'Logging In...'
+                                : 'Login'
+
+                            }
+                        </button>
                     </div>
                     
                     <div class='signup-option-container'>
