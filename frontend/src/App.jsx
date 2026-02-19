@@ -1,5 +1,6 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { Analytics } from '@vercel/analytics/react'
 import MovieDetailsPage from '../src/pages/MovieDetailsPage'
 import LoginPage from './pages/LoginPage'
 import SignupPage from './pages/SignupPage'
@@ -19,6 +20,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/movies/details/:movieId" element={<MovieDetailsPage/>} />
       </Routes>
+      <Analytics />
     </BrowserRouter>
   );
 }
