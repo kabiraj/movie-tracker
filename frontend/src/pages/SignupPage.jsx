@@ -91,7 +91,7 @@ function SignUpPage() {
                 setErrors({...errors, general:  data.error || data.message || ' Server error'})
                 return
             }
-            navigate('/login')
+            navigate('/login', { state: { successMessage: 'Account created successfully. Please log in.' } })
         } catch {
             setErrors({...errors, general: 'Network error. Try again.'})
         }

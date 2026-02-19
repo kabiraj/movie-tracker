@@ -233,6 +233,9 @@
     color: var(--accent-secondary);
 }
 
+.success-message{
+     color: var(--text-primary)
+}
 /* Responsive Design */
 @media (max-width: 525px) { 
     .login-page {

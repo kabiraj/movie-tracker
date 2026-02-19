@@ -1,7 +1,6 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import '../styles/LoginPage.css'
-import { Link } from 'react-router-dom'
 import { API_BASE } from '../config'
 
 // login form. we validate email and password then call the backend. if it succeeds we save the token and send them to search.
@@ -15,6 +14,8 @@ function LoginPage(){
         general: ''
     })
     const navigate = useNavigate()
+    const location = useLocation()
+    const [flash, setFlash] = useState(location.state?.successMessage || '')
 
     const validateForm = () => {
         const newErrors = { email: '', password: '', general: '' }
@@ -84,6 +85,7 @@ function LoginPage(){
         }
     }
 
+    
     return (
         <div className='login-page'>
             <div className='login-logo-container'>
@@ -107,9 +109,12 @@ function LoginPage(){
                     <p>Sign in to your account</p>
                 </header>
                 <form onSubmit={handleSubmit} noValidate>
-                    {errors.general && (
-                        <div className="error-message general">{errors.general}</div>
+                    {flash && (
+                        <div className="success-message">{flash}</div>
                     )}
+                    {errors.general && (
+                            <div className="error-message general">{errors.general}</div>
+                        )}
                     <div className="form-field-login">
                         <label htmlFor="email-input">Email</label>
                         <input 
