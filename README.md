@@ -34,13 +34,12 @@ movie-tracker-app/
 Create `/backend/.env`:
 
 ```env
-MONGODB_URI=your_mongodb_connection_string
-TMDB_API_KEY=your_tmdb_api_key
-JWT_SECRET=your_jwt_secret
+MONGODB_URI= mongodb_connection_string
+TMDB_API_KEY= tmdb_api_key
+JWT_SECRET=jwt_secret
 FRONTEND_URL=http://localhost:5173
 ```
 
-You already have a template at `/backend/.env.example`.
 
 ### Frontend
 Create `/frontend/.env`:
@@ -49,7 +48,6 @@ Create `/frontend/.env`:
 VITE_API_URL=http://localhost:3000
 ```
 
-You already have a template at `/frontend/.env.example`.
 
 ## Run Locally
 
@@ -103,9 +101,3 @@ Frontend (Vercel):
 3. Output directory: `dist`
 4. Add `VITE_API_URL=https://your-backend-url`
 
-For React Router refresh support on Vercel, keep `/frontend/vercel.json` in the repo.
-
-## Notes
-
-- Do not commit real `.env` files.
-- Rotate keys immediately if any secret was pushed to GitHub.
