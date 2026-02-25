@@ -64,10 +64,9 @@ function LoginPage(){
 
             if (!response.ok) {
                 setErrors({
-                    email: '',
-                    password: '',
                     general: data.error || 'Login failed'
                 })
+                setStatus('idle')
                 return
             }
             setStatus("success")
@@ -106,6 +105,9 @@ function LoginPage(){
                     <p>Sign in to your account</p>
                 </header>
                 <form onSubmit={handleSubmit} noValidate>
+                    { errors.general && (
+                        <span className="error-message general">{errors.general}</span>
+                    )}
                     <div className="form-field-login">
                         <label htmlFor="email-input">Email</label>
                         <input 

@@ -27,7 +27,7 @@ router.post('/signup', async (req, res) => {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        await User.create({fullName, email, password:hashedPassword});
+        await User.create({fullName, normalizedEmail, password:hashedPassword});
         res.status(201).json({ message: 'User created successfully' });
     } catch (error) {
         res.status(500).json({ error: 'Something went wrong. Please try again.' });
@@ -46,7 +46,7 @@ router.post("/login", async (req, res) => {
         const normalizedEmail = String(email).trim().toLowerCase();
         const user = await User.findOne({ email: normalizedEmail });
         if(!user){
-            return res.status(404).json({error: "Incorrect username or password"});
+            return res.status(401).json({error: "Incorrect username or password"});
         }
 
         // compare the password they sent with the hashed one we stored
