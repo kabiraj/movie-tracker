@@ -61,12 +61,20 @@ router.get("/search", authenticateToken, async (req, res) => {
 router.get("/details/:movieId", authenticateToken, async (req, res) => {
     try {
         let movieId = req.params.movieId;
-        const TMDB_API_KEY = process.env.TMDB_API_KEY;
+        const cachedMovie = await Movie.findOne({movieId: movieId});
+        let data = {}
 
-        const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits,images,release_dates,videos`;
+        if(cachedMovie) {
+            console.log("Movie details from db");
+            data = cachedMovie.fullTmdbData;
+        } else {
 
-        const response = await fetch(tmdbUrl);
-        const data = await response.json();
+            const TMDB_API_KEY = process.env.TMDB_API_KEY;
+            const tmdbUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${TMDB_API_KEY}&append_to_response=credits,images,release_dates,videos`;
+            const response = await fetch(tmdbUrl);
+            data = await response.json();
+            console.log("Movie details from api");
+        }
 
         if(data.status_code || !data.id){
             res.status(404).json({ error: data.status_message || "Movie not found" });

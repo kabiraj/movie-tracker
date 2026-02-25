@@ -29,7 +29,6 @@ function MovieDetailsPage() {
                     return
                 } 
                 const data = await response.json()
-                console.log(data)
                 setMovie(data)
                 setLoading(false)
             } catch (error) {

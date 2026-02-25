@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { useNavigate, useLocation, Link } from 'react-router-dom'
+import { useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 import '../styles/LoginPage.css'
 import { API_BASE } from '../config'
 
@@ -14,9 +14,6 @@ function LoginPage(){
         general: ''
     })
     const navigate = useNavigate()
-    const location = useLocation()
-    const [flash, setFlash] = useState(location.state?.successMessage || '')
-
     const validateForm = () => {
         const newErrors = { email: '', password: '', general: '' }
         let isValid = true
@@ -109,12 +106,6 @@ function LoginPage(){
                     <p>Sign in to your account</p>
                 </header>
                 <form onSubmit={handleSubmit} noValidate>
-                    {flash && (
-                        <div className="success-message">{flash}</div>
-                    )}
-                    {errors.general && (
-                            <div className="error-message general">{errors.general}</div>
-                        )}
                     <div className="form-field-login">
                         <label htmlFor="email-input">Email</label>
                         <input 
